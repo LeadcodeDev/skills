@@ -170,6 +170,7 @@ Goal:         <one sentence>
 Invariants:   <business rules that must hold — encoded in types or tests>
 Out of scope: <what this change explicitly does not do>
 Acceptance:   <observable checks proving it works>
+Modules:      <bounded contexts touched — a change spanning many is misplaced, not large>
 Files:        <expected files touched>
 Verify:       <exact commands to run before claiming done>
 ```
@@ -186,9 +187,25 @@ Written once, it is reused three times: it seeds sub-agent briefings (L), the PR
 - Business logic depends on nothing from infrastructure. If domain code knows a storage or transport detail, the boundary is already broken — flag it.
 - Make invalid states unrepresentable. Encode constraints in the type system instead of scattered defensive checks; validate and convert at boundaries with dedicated types, never with dispersed validation.
 - Do not abstract before the third occurrence. Two similar cases are a coincidence; three are a pattern. Prefer honest duplication over a wrong abstraction.
+- **Depth beats count.** A good module hides a lot behind a small interface. A shallow one — a wrapper whose interface costs about as much as what it hides — is worse than no module at all: the indirection is paid and no abstraction is bought. The rule of three stops you abstracting too early; this stops you keeping an abstraction that never paid. Judge a module by what its interface lets a caller *not* know.
 - When making a non-obvious design decision, record the _why_ (a short ADR-style note or comment), including the rejected alternative.
 
 **If the project is in Rust, or follows a hexagonal/port-adapter architecture:** read `references/rust.md` (once per session) before doing architecture or implementation work. It contains binding rules on dispatch, port/adapter boundaries, type-driven invariants, error handling, persistence, and testing specific to that stack.
+
+## Architectural drift (between changes, not during)
+
+Every rule above judges one change. Drift is not a property of any single change — a codebase can satisfy all of them, commit after commit, and still degrade, because the degradation is emergent. No local rule catches a global trend.
+
+Agents sharpen this. They accelerate adding code far more than they accelerate deleting, regrouping, or redrawing a boundary — those need a view of the whole that writing speed does not supply. The add-to-restructure ratio shifts, and that ratio *is* entropy.
+
+So the check has to fire *between* changes. Propose an architecture pass — the `audit` skill when installed, otherwise a scoped read of the same ground — on a signal rather than on a schedule nobody remembers:
+
+- an L feature has just finished integrating
+- a change had to touch noticeably more modules than its mini-spec predicted
+- the same file keeps turning up in changes that have nothing to do with each other
+- a fix required understanding code nobody expected to read
+
+Propose it; never run it unasked. It is read-only, but it costs a session's attention, and spending that is the user's call.
 
 ## Writing code
 
