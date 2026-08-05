@@ -46,6 +46,16 @@ Each task gets exactly one planning artifact. For M, that artifact is the mini-s
 
 The single exception: M work where several genuinely different architectures are in play *and* the user's intent is unclear. Two candidate implementations of the same architecture is not that case.
 
+## The spec phase and the implementation phase
+
+Round-trips are not all worth the same, and the mini-spec is the line between them.
+
+**Before the spec exists**, questions are cheap relative to what they prevent. A request restated faithfully is still incomplete — restating confirms what the user said, not what they left out. Interrogate here: what must never happen, where the change stops, what proves it works. `Invariants`, `Out of scope` and `Acceptance` are the fields misalignment hides in, so any of them you would otherwise guess is a question. Ask them batched, in one message, and keep working on whatever they do not block.
+
+**Once the spec exists, it is the answer.** Implementation does not re-open what the spec settles — that is what writing it bought. Every later turn is an Iteration against it (see Step 0.1), and the speed rules apply in full.
+
+A question arising *during* implementation is a defect in the spec, not a normal event. Do not drift into ad-hoc Q&A: name the gap, amend the spec in one line, and say that you amended it. An unamended spec quietly stops being the referential, and every later turn re-litigates what it was meant to settle.
+
 ## The opening announcement (S/M) — never a question
 
 For S or M, the first message announces and the same turn starts working. **Do not end that turn.** The announcement and the first tool call ship together; if you find yourself finishing a message and waiting, you have turned an announcement into a gate.
