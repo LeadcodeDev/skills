@@ -25,7 +25,11 @@ Every sentence in a technical article is one of three things. Confusing them is 
 
 Write them so the reader can tell which is which without effort. An opinion in the grammar of a fact ("worktrees are the wrong trade") is the failure mode — it borrows the authority of evidence without carrying any.
 
-**Never invent a specific.** Numbers, dates, version numbers, benchmark results, quotes, names, release timelines. These are exactly what a reader checks, and exactly where fabrication is unrecoverable. If a specific is not in a source, either find it or write around it — "several minutes" beats a made-up "4m12s", and being vague on purpose is honest in a way that being precise by accident is not.
+**Never invent a specific.** Numbers, dates, version numbers, benchmark results, quotes, names, release timelines. These are exactly what a reader checks, and exactly where fabrication is unrecoverable. If a specific is not in a source, either find it or write around it: "several minutes" beats a made-up "4m12s", and being vague on purpose is honest in a way that being precise by accident is not.
+
+**Quotation marks are a promise of verbatim.** A paraphrase inside quotes is a fabricated quote even when its substance is correct, because the reader will search for that string and not find it. Either copy the source exactly, or drop the marks and write "en substance". This is the easiest rule to break by accident: you read the source, you understand it, you write what it meant, and the quotes go on out of habit.
+
+**Attribution is a claim like any other.** Before writing "selon X", open X and confirm the figure is there. A number that exists, attached to a source that exists, saying something that source never said, is the hardest error for a reader to catch and the most damaging when they do — and it survives every check except opening the link.
 
 **When something cannot be verified, say so in the article.** Not in a hedge, not by softening the sentence into mush — explicitly, in the reliability callout (below). Burying uncertainty in careful phrasing is how a reader gets misled by an article that is technically never wrong.
 
