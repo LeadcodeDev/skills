@@ -7,7 +7,7 @@ description: Engineering methodology and behavioral guardrails for building appl
 
 Behavioral rules for how to conduct application development work. These are process guardrails, not style preferences. Follow them by default; deviate only when the user explicitly asks or the situation clearly demands it — and say so when you do.
 
-**Speed principle.** The scarcest resource in an interactive session is a user round-trip. Announce decisions and proceed; do not wait for approval unless a rule below explicitly requires it. Blocking validation is reserved for L-sized decomposition, merges into the default branch, and irreversible operations. An announcement is the user's chance to interrupt — not a gate.
+**Speed principle.** The scarcest resource in an interactive session is a user round-trip. Announce decisions and proceed; do not wait for approval unless a rule below explicitly requires it. Blocking validation is reserved for L-sized decomposition, merges into the default branch, and irreversible or outward-facing operations. An announcement is the user's chance to interrupt — not a gate.
 
 **Language.** Address the user in French — every message, always: explanations, questions, announcements, summaries, review remarks, hand-offs. This holds whatever language the codebase, the tickets, the tooling output, or the user's own message are in; an English-heavy context is not a reason to answer in English. Code, identifiers, commands, file paths, error text, and other quoted tool output are reproduced verbatim — they are quotations, not prose, and are never translated. Standard technical vocabulary keeps its usual English form inside a French sentence (`commit`, `pull request`, `borrow checker`, `trait`) — never invent a French translation for a term the reader already knows in English. Artifacts published to the repository go the other way: commit messages, issues, and PRs are written in English (see "Git essentials").
 
@@ -54,7 +54,9 @@ Contents: the size class, the branch plan (name, target), and — for M — the 
 
 The user reads it while you work. Interrupting is their move, not a step in yours.
 
-**The only three blocking waits in this methodology:** an L decomposition or branch plan, any merge into the default branch, and anything irreversible (deletions, force-pushes, schema migrations against shared environments). If the situation is not one of those three, there is no wait.
+**The only three blocking waits in this methodology:** an L decomposition or branch plan, any merge into the default branch, and anything irreversible or outward-facing.
+
+That third one is a closed list, not a judgement call — deletions, force-pushes, schema migrations against shared environments, spending money, and any action other people can see: sending mail, posting to a shared channel, publishing a package, opening a public issue. If the situation is not on that list, there is no wait.
 
 ## Red flags — you are about to waste a round-trip
 
@@ -63,7 +65,7 @@ The user reads it while you work. Interrupting is their move, not a step in your
 | "This follow-up deserves a proper spec" | It's an Iteration. The existing mini-spec holds. |
 | "I'll post the plan and wait for a go-ahead" | S/M announcements never wait. Announce and start in the same turn. |
 | "Let me brainstorm before writing the mini-spec" | One planning pass. For M, the mini-spec is the plan. |
-| "The user might want to weigh in first" | Interrupting is their move. Only three situations block. |
+| "The user might want to weigh in first" | Interrupting is their move. Only three situations block, and the third is a closed list. |
 | "Let me re-read git.md before this commit" | Routine Git rules are inline. Once per session, L topology only. |
 
 ## Project kickoff (once per project, not per session)
@@ -129,7 +131,9 @@ Before producing or modifying code:
 3. Read error messages and stack traces in their entirety before hypothesizing.
 4. Search for prior art (RFCs, existing crates/libraries, similar code in the repo) before building from scratch.
 
-If the problem cannot be restated in two plain sentences, it is not yet understood. Restate it to the user and get confirmation before writing code when the task is ambiguous or high-stakes.
+If the problem cannot be restated in two plain sentences, it is not yet understood. When the requirement itself is genuinely ambiguous — you cannot tell what is being asked — restate it and ask. That is a question about the request, not approval for a plan.
+
+Consequence is already covered by the third blocking wait above, and that list is closed. Rule zero does not add a second, vaguer trigger for it: a task that feels weighty but appears nowhere on that list calls for reading more carefully, not for pausing.
 
 ## The mini-spec (M and larger)
 
