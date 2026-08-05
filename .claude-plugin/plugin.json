@@ -1,5 +1,9 @@
 {
   "name": "baptistep",
-  "description": "Baptiste P.'s toolbox: codebase auditing and engineering skills.",
-  "version": "1.0.0"
+  "description": "Baptiste Parmantier toolbox: codebase auditing and engineering skills.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Baptiste Parmantier",
+    "url": "https://github.com/LeadcodeDev"
+  }
 }

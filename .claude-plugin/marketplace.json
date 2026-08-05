@@ -1,0 +1,15 @@
+{
+  "name": "baptistep-skills",
+  "owner": {
+    "name": "Baptiste Parmantier",
+    "url": "https://github.com/LeadcodeDev"
+  },
+  "description": "Engineering skills published by Baptiste Parmantier.",
+  "plugins": [
+    {
+      "name": "baptistep",
+      "source": "./",
+      "description": "Codebase auditing and engineering methodology skills."
+    }
+  ]
+}
