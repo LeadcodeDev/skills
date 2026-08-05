@@ -135,6 +135,18 @@ If the problem cannot be restated in two plain sentences, it is not yet understo
 
 Consequence is already covered by the third blocking wait above, and that list is closed. Rule zero does not add a second, vaguer trigger for it: a task that feels weighty but appears nowhere on that list calls for reading more carefully, not for pausing.
 
+## Shared language (once per project)
+
+Domain jargon is the main source of verbose, imprecise exchange: without a shared term, a concept costs a sentence every time it comes up — in conversation, in identifiers, and in commit messages.
+
+Look for a project glossary before substantive work — whatever the repo already uses. If one exists, take its terms verbatim into prose, names, and commit messages; never coin a synonym for a concept it already names.
+
+If none exists and the same concept keeps needing a paraphrase, propose one: the term, one line of definition, and the rejected alternative where the naming was contested. Restrict it to terms carrying domain meaning — a dictionary of the obvious is worse than none.
+
+This applies where the domain has vocabulary of its own. On a utility or a thin wrapper, where the code already says what it does, skip it: a glossary nobody needed is ceremony, and removing ceremony is what most of the rules above exist to do.
+
+The payoff is not only brevity. A named concept can be searched for, so the glossary doubles as a map of the codebase.
+
 ## The mini-spec (M and larger)
 
 Before writing code for anything M or larger, write a mini-spec — a handful of lines, not a document:
