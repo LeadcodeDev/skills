@@ -1,6 +1,6 @@
 ---
 name: writing-article
-description: Write complete, factually rigorous, sourced long-form articles for an Explainer blog (apps/blog/src/content/posts/). Use this whenever the user wants a blog article, a technical deep-dive, an explainer piece, a post-mortem, a benchmark write-up, or a write-up of something they built or investigated — including casual asks like "write a post about X", "draft an article on Y", "turn my notes into a blog post", "we should write this up". It runs the whole pipeline: inventorying and verifying sources, filling research gaps, checking coverage, drafting, and emitting publication-ready MDX. Prefer it over general drafting help whenever the output will be published and read by strangers, because it enforces sourcing and factual discipline that ordinary writing assistance does not. For Explainer documentation pages rather than articles, use explainer-content-writer instead.
+description: Write complete, factually rigorous, sourced long-form articles for an Explainer blog (apps/blog/src/content/posts/). Use this whenever the user wants a blog article, a technical deep-dive, an explainer piece, a post-mortem, a benchmark write-up, or a write-up of something they built or investigated — including casual asks like "write a post about X", "draft an article on Y", "turn my notes into a blog post", "we should write this up". It runs the whole pipeline: inventorying and verifying sources, filling research gaps, checking coverage, drafting, humanizing the prose, and emitting publication-ready MDX. Prefer it over general drafting help whenever the output will be published and read by strangers, because it enforces sourcing and factual discipline that ordinary writing assistance does not. For Explainer documentation pages rather than articles, use explainer-content-writer instead.
 ---
 
 # Explainer Article Writer
@@ -93,13 +93,33 @@ Re-read the draft hunting only for factual defects, with the article's own claim
 
 This pass is cheap now and impossible later. A correction on a published article reaches a fraction of the people the error did.
 
-### 7. Format, disclose, save
+### 7. Humanize the prose
 
-Produce the MDX (format below), add the reliability callout, then:
+Run the `humanizer` skill on the verified draft. This is not optional polish: a long-form draft carries LLM tells — hollow transitions, inflated vocabulary, reflexive hedging, rule-of-three padding, em-dash overuse — and a reader who notices them discounts the whole article, including the parts you sourced carefully. The factual work above is what earns trust; robotic prose is what stops it being spent.
+
+Do this on the prose, before MDX formatting. The humanizer works on sentences, not directives, and running it first keeps the reliability callout out of its path entirely.
+
+**Two of its patterns interact with the factual rules, in opposite directions.**
+
+Pattern 5, *vague attributions and weasel words*, pulls the same way as this skill: it replaces "experts believe" with a named source. Let it work.
+
+Pattern 20, *knowledge-cutoff disclaimers*, collides. It targets phrasing like "as of [date]" and "while specific details are limited" — which is the exact shape of an honest verification record. The two are not the same thing:
+
+- A **model artifact** is the assistant apologising for its own training limits. Remove it.
+- A **verification record** is the author stating what they tested, against which version, on what date, and what they could not confirm. Keep it, word for word.
+
+If a sentence names what *you* checked, it is evidence. If it hedges about what *the model* knows, it is noise.
+
+**Nothing factual may change in this pass.** Quotes, figures, dates, version numbers, benchmark results, link targets and the reliability callout are off limits — the humanizer rewrites voice, not evidence. Say so when invoking it.
+
+Then re-check every specific against step 6. A rewriting pass over a sourced article can silently round a number or drop a qualifier, and that defect is invisible precisely because the prose reads better afterwards.
+
+### 8. Format, disclose, save
+
+Produce the MDX (format below) and add the reliability callout, then:
 
 1. Show the draft in the conversation before writing any file.
-2. Offer the `humanizer` skill — long-form drafts carry LLM tells (hollow transitions, inflated vocabulary, reflexive hedging) that undercut the credibility everything above was protecting.
-3. Ask before saving, and if the file exists, read it and show what changes.
+2. Ask before saving, and if the file exists, read it and show what changes.
 
 ---
 
