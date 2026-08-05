@@ -75,7 +75,8 @@ Before the first M or L task in a repository, look for `.claude/dev-methodology.
 1. **Git permissions** — may commits / PR creation / PR merges be done by Claude, or is any of those human-only?
 2. **Merge strategies** — squash or rebase for feature → workstream PRs, and how the workstream branch lands on the default branch.
 3. **Tracking** — milestone? issues? a parent chantier issue with sub-issues?
-4. **Model strategy** — see below; only relevant for L work.
+4. **Issue and PR metadata** — default reviewers, default assignee, and which labels this repository actually uses. Without these recorded, every issue and PR opens bare (see "Git essentials").
+5. **Model strategy** — see below; only relevant for L work.
 
 Then write the answers to `.claude/dev-methodology.local.md` so no future session asks again, e.g.:
 
@@ -87,6 +88,9 @@ merge-pr: human-only            # or claude-allowed
 feature-merge: squash           # feature → workstream
 workstream-merge: rebase        # workstream → default branch
 tracking: chantier-issue + sub-issues
+reviewers: alice, bob           # default PR reviewers; CODEOWNERS wins where it applies
+assignee: @me                   # default assignee on issues and PRs
+labels: bug, feat, chore, docs  # labels this repository actually has
 model-strategy: split           # or current-everywhere
 ```
 
@@ -197,6 +201,11 @@ These rules cover routine Git operations inline — do not reload a reference fi
 - Never commit directly to the default branch. Branch names describe intent (`feature/…`, `chantier/…`, or the repository's existing convention — check the repo's history and follow it).
 - One commit = one logical change, with a message explaining the _why_. `git log` is the most-read documentation in the project.
 - Permissions (commit / PR creation / merge) and merge strategies come from `.claude/dev-methodology.local.md` (see kickoff). If the file answers, act without re-asking; if it is missing or silent, ask once in a consolidated batch and record the answer. If a permission is human-only, prepare everything up to that boundary and hand off.
+- **Issues and PRs open complete, never bare.** Reviewers, assignee, and labels are set in the creation command itself, not added afterwards — afterwards does not happen, and a bare PR silently becomes nobody's job.
+  - **Assignee** — whoever will do the work. Default to the user's own account.
+  - **Reviewers** — from `.claude/dev-methodology.local.md`. A repository `CODEOWNERS` file wins for the paths it covers. Never guess a reviewer: requesting review notifies a human, which is an outward-facing action, and the wrong name pings someone for nothing.
+  - **Labels** — only labels that already exist in the repository. List them first and pick from that set; never create one as a side effect of opening a PR. If none fits, say so and propose the new label separately.
+- **Every PR references its issue.** `Closes #N` when the PR fully resolves it, `Refs #N` when it advances it without closing. If no issue exists, state that in the body rather than leaving the link silently absent — an unlinked PR should read as a decision, not an oversight.
 
 ## Review and collaboration
 

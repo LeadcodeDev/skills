@@ -45,4 +45,6 @@ Duplicated here verbatim so this file stands alone when handed to a sub-agent:
 - Never commit directly to the default branch.
 - One commit = one logical change, message explaining the *why*.
 - Before opening a PR, re-read the full diff with hostile-stranger eyes; the PR description states the why, the scope, and what is explicitly out of scope.
+- **Issues and PRs open complete, never bare.** Reviewers, assignee, and labels are set in the creation command itself, not added afterwards. Assignee: whoever will do the work. Reviewers: from `.claude/dev-methodology.local.md`, with `CODEOWNERS` winning for the paths it covers — never guess, requesting review notifies a human. Labels: only labels the repository already has; propose a new one separately rather than creating it as a side effect.
+- **Every PR references its issue.** `Closes #N` when it fully resolves it, `Refs #N` when it advances it. If no issue exists, state that in the body rather than leaving the link silently absent.
 - A PR that cannot be reviewed in one sitting is a sign the workstream decomposition was wrong — flag it rather than pushing through.
