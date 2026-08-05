@@ -31,6 +31,18 @@ Write them so the reader can tell which is which without effort. An opinion in t
 
 ---
 
+## Evidence earns its place
+
+Sourcing discipline says what a claim needs. It says nothing about how much evidence an article should carry, and left alone it drifts toward a literature review: every sentence propped up, every figure quoted, the author invisible behind the citations.
+
+**Your own work is the spine, not an exhibit.** The article nobody else can write is the one about what you built, measured, broke, or renamed. External sources are there to hold up the parts your experience cannot reach — the history of a term, a study that contradicts the folklore, a number you did not measure yourself. When the piece opens with what you did and returns to it, the citations become support. When it opens with citations, your experience becomes an anecdote at the end.
+
+**A number earns its place only if removing it changes the argument.** Three decimal figures in one paragraph do not make a point three times stronger; they make the reader skim. Keep the one that carries the claim, describe the rest in words: *à peu près deux fois plus de temps* is easier to trust and remember than *124 %*, and it is no less true.
+
+**One source read properly beats five gestured at.** A methodology you actually took apart is worth more than a row of links, and it is the thing a reader could not have found alone.
+
+**Cut the tour of the literature.** If four studies say the same thing, cite the best one. If a source only corroborates something already established, it is decoration.
+
 ## Workflow
 
 ### 1. Establish what the article argues
@@ -72,7 +84,9 @@ Structure is free — pick whatever the subject wants. But an article does not g
 - **What remains open** — what you do not know, what is contested, what would change your mind. This is what separates an article from a pitch.
 - **An actionable next step** — what the reader does now. Docs, repository, a related article, a command to run.
 
-If the subject genuinely has no serious counter-argument, that is worth a sentence explaining why — it is unusual, and asserting it without explanation reads as not having looked.
+If the subject genuinely has no serious counter-argument, that is worth a sentence explaining why. It is unusual, and asserting it without explanation reads as not having looked.
+
+**These are things to cover, not headings to write.** A counter-argument belongs where the reader's objection forms, the limits belong beside the claim they bound, and what remains open belongs in the sentence that overreaches without it. The moment this list becomes a table of contents, it has stopped improving articles and started producing the same article every time.
 
 ### 5. Draft
 
@@ -114,35 +128,50 @@ If a sentence names what *you* checked, it is evidence. If it hedges about what 
 
 Then re-check every specific against step 6. A rewriting pass over a sourced article can silently round a number or drop a qualifier, and that defect is invisible precisely because the prose reads better afterwards.
 
-### 8. Format, disclose, save
+### 8. Format, then sweep
 
-Produce the MDX (format below) and add the reliability callout, then:
+Produce the MDX (format below). Formatting is a rewriting pass like any other, and it undoes humanizer work: bolded paragraph openers creep back, em dashes reappear at the joins, headings drift into Title Case. This is observed behaviour, not a theoretical risk — it happens on almost every article.
+
+So sweep the formatted file mechanically before showing it. Grep, do not eyeball:
+
+- `—` outside quoted material. In French prose it is a legitimate mark, but it is also the most recognisable LLM tell there is, and the reader who spots the pattern discounts everything else. Recast with a comma, a colon, or parentheses. Inside a quotation, leave it: reproducing a source is not a style decision.
+- bolded openings of paragraphs that are not genuine labels
+- Title Case in headings, emoji, curly quotation marks
+- every specific, re-checked against step 6
+
+Then:
 
 1. Show the draft in the conversation before writing any file.
 2. Ask before saving, and if the file exists, read it and show what changes.
 
+### French-specific rules
+
+The article is usually in French, and these are register choices a reader notices even when they could not name them:
+
+- **`que l'on`, never `qu'on`.** The elision reads as spoken French and cheapens written prose. It costs one word.
+- Straight apostrophes and quotes, matching what the blog already publishes. Check an existing post rather than assuming.
+- French quotation marks `« »` with non-breaking spaces inside, for quoted material.
+- Keep technical vocabulary in English where that is what practitioners say (`commit`, `refactoring`, `build`). Inventing a French equivalent for a term the reader knows in English is worse than the English.
+
 ---
 
-## The reliability callout
+## Rigour is infrastructure, not display
 
-Every article carries one, near the top. It is the disclosure that makes the rest trustworthy: a reader who sees you name your own weak points extends credit to the parts you state plainly.
+The verification work above is what makes an article worth reading. Showing that work is what makes it tedious.
 
-```mdx
-:::callout{variant="info"}
-Verified against Rust 1.84 and cargo 1.84.0 on 2026-08-05. The concurrency
-figures come from a single machine and will differ on yours. I could not
-confirm whether the target-directory lock behaves the same on Windows —
-everything here was tested on macOS and Linux.
-:::
-```
+An article that opens with a methodology box, footnotes its own sourcing, and closes with a section confessing what the author could not establish reads as a thesis defence. The reader did not ask for a defence; they came for what you know. Apparatus signals anxiety, and anxiety is not authority — the writer who obviously knows the subject mentions evidence where it decides something and stays quiet elsewhere.
 
-Three things belong in it:
+So: do all of it, show almost none of it.
 
-- **What was verified, against what version, when.** Technical articles rot. A dated, versioned claim ages honestly; an undated one silently becomes wrong.
-- **What could not be verified.** Named, not hinted at.
-- **Where the evidence is thin.** A single benchmark, one machine, a sample of one, a vendor's own numbers.
+**Disclosure belongs in the argument, at the point it bites.** When a claim rests on thin evidence, say so in the sentence that makes the claim, in your own voice, and move on:
 
-Use `variant="warning"` instead when a genuinely load-bearing claim is unverified — the reader should meet that before investing in the article, not after.
+> Je n'ai trouvé aucune étude qui mesure ça sur la durée. Ce qui suit repose sur des mesures transversales, et sur ce que j'ai vu dans mes propres dépôts.
+
+That single clause does everything a disclosure box does, and it costs the reader nothing because it arrives exactly where the doubt would have formed. A box at the top asks them to hold a caveat in mind for two thousand words before it becomes relevant.
+
+**Never build a section named after a rule you are following.** No *What I verified*, no *What I don't know*, no *Methodology*, no *Sources*. The coverage checklist is a list of things the article must **cover**, not a list of headings it must **contain** — a checklist that becomes a table of contents has stopped being a quality mechanism and started being a form.
+
+**Version and date the claims that rot, not the article.** A stale claim is a specific claim, so pin it where it sits: `sur cargo 1.96` inside the sentence beats a banner declaring what the whole article was tested against.
 
 ---
 
