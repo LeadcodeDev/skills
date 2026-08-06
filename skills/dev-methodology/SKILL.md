@@ -77,6 +77,7 @@ That third one is a closed list, not a judgement call — deletions, force-pushe
 | "Let me brainstorm before writing the mini-spec" | One planning pass. For M, the mini-spec is the plan. |
 | "The user might want to weigh in first" | Interrupting is their move. Only three situations block, and the third is a closed list. |
 | "Let me re-read git.md before this commit" | Routine Git rules are inline. Once per session, L topology only. |
+| "The PR is already open, its description stands" | Every commit can invalidate it. Re-read it before pushing. |
 
 ## Project kickoff (once per project, not per session)
 
@@ -245,6 +246,8 @@ These rules cover routine Git operations inline — do not reload a reference fi
   - **Reviewers** — from `.claude/dev-methodology.local.md`. A repository `CODEOWNERS` file wins for the paths it covers. Never guess a reviewer: requesting review notifies a human, which is an outward-facing action, and the wrong name pings someone for nothing.
   - **Labels** — only labels that already exist in the repository. List them first and pick from that set; never create one as a side effect of opening a PR. If none fits, say so and propose the new label separately.
 - **Every PR references its issue.** `Closes #N` when the PR fully resolves it, `Refs #N` when it advances it without closing. If no issue exists, state that in the body rather than leaving the link silently absent — an unlinked PR should read as a decision, not an oversight.
+- **The PR description is part of the diff.** It is written when the PR opens and rots silently with every commit pushed afterwards. Before pushing to an open PR, re-read its description: if the commit invalidates anything the description claims — a rule removed, an approach reversed, a decision taken the other way — rewrite it in the same turn. A description that merely lags behind is incomplete; one that still promises what the branch has since removed actively misleads, and it misleads the single person whose job is to catch exactly that.
+- **Record in the description what the session knows and the diff does not.** Why an approach was tried and abandoned, what an evaluation measured, which alternative was rejected and on what evidence. The branch keeps the code; the conversation that justified it disappears. A reviewer six months out has only this text.
 
 ## Review and collaboration
 
