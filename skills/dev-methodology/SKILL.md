@@ -162,6 +162,18 @@ This applies where the domain has vocabulary of its own. On a utility or a thin 
 
 The payoff is not only brevity. A named concept can be searched for, so the glossary doubles as a map of the codebase.
 
+**And the entry document answers *where*.** A glossary says what a thing is called; it does not say which file registers a module, which layer owns a rule, or which command verifies the backend. Both questions get asked at the start of every session, by every agent, and only one of them has a glossary. Name the canonical locations and the commands that actually run, and point at one module worth imitating.
+
+An entry document describing a layout the project has outgrown is worse than none. It does not merely fail to help: it sends every session down a wrong path until the code contradicts it, and the cost of that detour is paid once per session, forever.
+
+**Correct it the moment you find it wrong.** Documentation rots because updating it is a separate act nobody schedules — so do not schedule it. The trigger is already free: when a session reads the entry document and then finds the codebase disagrees, that discovery *is* the update. A path that moved, a command that fails, a layer that was reorganised. The detour has already been paid; write it down in the same turn, before the finding evaporates with the session. One line is enough.
+
+The same holds for what the current change just made true. A new module, a new registration point, a new verification command — if the map would now be wrong, fixing it is part of the change, not a follow-up someone schedules and never does.
+
+**The cheapest audit is to run the commands it documents.** One that fails has been wrong for as long as nobody ran it, and every session since started from a false premise.
+
+**And keep it short.** This document is loaded into every context, every session, by every agent, so a line that saves no exploration is a line every future run carries for nothing. A line earns its place only by being both stable and load-bearing: where things register, what the layers are, which commands actually run. Not what the code already says plainly — that duplicate will drift. Not what changes per feature — that belongs in the briefing.
+
 ## The mini-spec (M and larger)
 
 Before writing code for anything M or larger, write a mini-spec — a handful of lines, not a document:
