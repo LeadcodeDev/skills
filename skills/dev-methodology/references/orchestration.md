@@ -22,12 +22,27 @@ The single most common orchestration failure is the orchestrator assuming a sub-
 A file partition is written before anyone has read the code deeply enough to enumerate files, so it is always a forecast. It fails in a predictable place: not on the feature code, which partitions cleanly, but on the small set of files every feature must touch. Anticipate them by name — in most codebases the list is short:
 
 - module and route registration (`mod.rs`, `lib.rs`, router or handler wiring)
-- dependency manifests and lockfiles (`Cargo.toml`, `package.json`)
+- dependency manifests (`Cargo.toml`, `package.json`)
 - migration directories, where the filename carries a sequence number
 - shared error enums, shared type modules, the composition root
 - config schemas and environment templates
 
 **These are orchestrator-owned. No sub-agent writes them.** A sub-agent needing a line added there reports the exact line; the orchestrator applies all of them at integration, in one pass, in a known order. This is what keeps two genuinely independent workstreams parallel when their only conflict is one registration line each — merging them to avoid a two-line edit trades real concurrency for nothing.
+
+### Generated artifacts are not convergence points
+
+A file that a command can reproduce from other files is not something to partition, hand-edit, or merge. It is something to **regenerate**.
+
+The test is one question: *can this file be rebuilt by running something?* Generated API clients, schema caches, lockfiles, derived type definitions, compiled assets — if yes, no sub-agent touches it, and neither does the orchestrator by hand. Regenerate it from the integrated state, once, after each integration.
+
+The two species sit side by side and are easy to confuse. `Cargo.toml` is hand-written, so a sub-agent reports the line it needs; `Cargo.lock` is derived, so nobody reports anything and the orchestrator rebuilds it. Applying the reporting rule to a generated file produces nonsense the moment the file is large: asking three sub-agents to report "the exact line" they need in a thousand-line generated client is a request none of them can honestly answer.
+
+Two failure modes make this worth a rule rather than a habit:
+
+- **Concurrent regeneration silently produces a wrong file.** Each agent regenerates from its own partial state, so each output is correct for one workstream and missing the others. The last write wins, the result compiles, and nothing announces that two workstreams' worth of definitions just vanished.
+- **Generated diffs bury the reviewed change.** A regenerated client can move a thousand lines beside twenty lines of actual work. A pull request that cannot be read is not reviewed, whatever its approval says.
+
+Declare these in the workstream state artifact as a third category, next to the owned files and the orchestrator-owned list: **regenerated at integration**, with the exact command that rebuilds each one.
 
 Record the partition — owned files per workstream, plus the orchestrator-owned list — in the workstream state artifact, beside the frozen contracts. It is the single source of truth for who writes what.
 
@@ -109,9 +124,11 @@ Before declaring an L feature integrated, run one final check — yourself or a 
 
 For any L feature, maintain one tracking artifact — the parent chantier issue body (preferred when issues were opted in at kickoff) or `docs/chantiers/<name>.md`:
 
-- The decomposition: workstream list with one-line missions.
+- The decomposition: workstream list with one-line missions, and what each depends on.
 - Status per workstream: pending / in-flight / integrated.
 - Frozen contracts, verbatim.
+- The file partition, in three categories: files owned per workstream, orchestrator-owned convergence points, and artifacts regenerated at integration with the command that rebuilds each.
+- Per-workstream environment where the toolchain would otherwise serialize: database name, build directory, port range.
 - Decision log: non-obvious choices with the rejected alternative.
 
 Update it at every integration, not at the end. This artifact is what makes the orchestration resumable by a future session with zero shared memory — write it for that reader.
