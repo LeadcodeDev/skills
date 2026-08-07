@@ -162,6 +162,10 @@ This applies where the domain has vocabulary of its own. On a utility or a thin 
 
 The payoff is not only brevity. A named concept can be searched for, so the glossary doubles as a map of the codebase.
 
+**And the entry document answers *where*.** A glossary says what a thing is called; it does not say which file registers a module, which layer owns a rule, or which command verifies the backend. Both questions get asked at the start of every session, by every agent, and only one of them has a glossary. Name the canonical locations and the commands that actually run, and point at one module worth imitating.
+
+An entry document describing a layout the project has outgrown is worse than none. It does not merely fail to help: it sends every session down a wrong path until the code contradicts it, and the cost of that detour is paid once per session, forever.
+
 ## The mini-spec (M and larger)
 
 Before writing code for anything M or larger, write a mini-spec — a handful of lines, not a document:

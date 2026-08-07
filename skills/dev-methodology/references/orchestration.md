@@ -85,6 +85,14 @@ Every dispatch contains all six sections. A sub-agent that has to guess will gue
 5. **Verification** — the exact commands to run before reporting done (seeded from the mini-spec's `Verify` line). When the environment provides `rtk`, write them in their `rtk`-prefixed form — sub-agent verification output is a major token sink and rtk filters it at the source.
 6. **Report format** — require structured data, not prose: files changed, tests run with their actual output, deviations from the spec, open questions. A bare "done" is not a report.
 
+**The briefing is a cache.** A sub-agent wakes with no context, so it rebuilds its model of the codebase from scratch — and so does the next one, and the one after that. Measured on a real chantier: across 72 sub-agents, **58% of all file reads were re-reads of a file another agent had already opened**, with one architectural file read independently by 24 of them. Each of those agents paid the read, then paid again to work out what mattered in it — and that second cost lands in generation time, which dominates everything else.
+
+The redundancy is structural, not sloppiness: an agent with no context has no way to know a sibling already answered the question. The only place it can be removed is upstream. **Anything more than one sub-agent would read belongs in the briefing.** The orchestrator reads once and distributes the result.
+
+This is what section 3 is for, used properly. A frozen contract is not only what a sub-agent must not modify — it is what it must not go looking for. And section 4 should name the module to imitate: "same layering as `<path>`" replaces a dozen exploratory reads, because an agent handed a canonical example does not have to infer the convention from three instances of it.
+
+The arithmetic only works if the excerpt is shorter than the file. Where it is not, name the file and say what to take from it — the expensive part was never the read, it was deciding what in it mattered.
+
 Point sub-agents at the skill excerpts they need (e.g. `references/rust.md` for Rust work) instead of paraphrasing them — paraphrase drifts from the source.
 
 Match the model to the stage: implementation of a well-specified workstream runs on the implementation model recorded at kickoff; review, verification, and judgment stages get the strongest reasoning available.
