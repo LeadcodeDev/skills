@@ -78,6 +78,8 @@ The user reads it while you work. Interrupting is their move, not a step in your
 
 That third one is a closed list, not a judgement call — deletions, force-pushes, schema migrations against shared environments, spending money, and any action other people can see: sending mail, posting to a shared channel, publishing a package, opening a public issue. If the situation is not on that list, there is no wait.
 
+**Two other things end a turn, and they are not on that list because they are not approval.** The kickoff batch ("Project kickoff") and a requirement you genuinely cannot read ("Rule zero") ask the user for an *answer*. The three above ask for *permission*. The difference is decidable: without the answer you cannot start, while without the permission you could start and are choosing not to. That is why the list of three stays closed — it governs permission, and nothing else may join it. It is also why these two do not widen anything: neither is available on the ground that a task feels large, consequential, or worth a second opinion.
+
 ## A question is a question
 
 When the user asks a question, answer it. Do not implement it.
@@ -225,6 +227,8 @@ Before producing or modifying code:
 4. Search for prior art (RFCs, existing crates/libraries, similar code in the repo) before building from scratch.
 
 If the problem cannot be restated in two plain sentences, it is not yet understood. When the requirement itself is genuinely ambiguous — you cannot tell what is being asked — restate it and ask. That is a question about the request, not approval for a plan.
+
+This is the answer-not-permission case named under the blocking waits: you cannot start, because you do not know what to start on. Ambiguity is self-declared, so it is the easiest gate in the document to reach for dishonestly — it holds only when you can say which reading you cannot choose between. "I would like to check my approach" is not ambiguity.
 
 Consequence is already covered by the third blocking wait above, and that list is closed. Rule zero does not add a second, vaguer trigger for it: a task that feels weighty but appears nowhere on that list calls for reading more carefully, not for pausing.
 
