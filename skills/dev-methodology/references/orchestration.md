@@ -1,6 +1,6 @@
 # Sub-Agent Orchestration
 
-Load this file once per session, before the first sub-agent dispatch or L-sized decomposition; re-read only if it was edited since. Use `superpowers:subagent-driven-development` when available as the execution protocol (task sequencing, checkpoints); the rules below govern what every dispatch must contain and how results are accepted — they apply on top of it, or standalone when superpowers is absent.
+Load this file once per session, before the first sub-agent dispatch of an L feature or an L-sized decomposition; re-read only if it was edited since. Not for S/M work, and not for a single delegated lookup — those are scheduling, not orchestration, and the rules they need are inline in `SKILL.md`. Use `superpowers:subagent-driven-development` when available as the execution protocol (task sequencing, checkpoints); the rules below govern what every dispatch must contain and how results are accepted — they apply on top of it, or standalone when superpowers is absent.
 
 The single most common orchestration failure is the orchestrator assuming a sub-agent "knows" something it never wrote down. A sub-agent wakes up with zero conversation context: it has not seen the user's messages, the decisions made, or the dead ends already explored. Everything it needs must be in the briefing.
 
