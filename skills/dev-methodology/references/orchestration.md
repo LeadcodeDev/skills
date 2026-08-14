@@ -96,7 +96,7 @@ Every dispatch contains all six sections. A sub-agent that has to guess will gue
 1. **Mission** — one sentence.
 2. **Context** — decisions already made and *why*, state of sibling workstreams, anything from the conversation the sub-agent needs. It cannot see the conversation.
 3. **Frozen contracts** — the types/ports/API shapes it must not modify, verbatim or by exact file path.
-4. **Scope** — the files it owns, the files it must not touch, and the orchestrator-owned convergence points it reports against instead of editing.
+4. **Scope** — the files it owns, the files it must not touch, and the orchestrator-owned convergence points it reports against instead of editing. An agent that writes nothing — a review lens, an audit pass, a lookup — owns no files: write **writes no files, reports only** in this slot rather than leaving it empty. A sub-agent reads its briefing, not the methodology, so "review sub-agents report, they do not repair" only reaches it if the briefing carries it. An empty scope reads as "unspecified", and an agent that fixes what it finds puts a second writer on files someone else owns.
 5. **Verification** — the exact commands to run before reporting done (seeded from the mini-spec's `Verify` line). When the environment provides `rtk`, write them in their `rtk`-prefixed form — sub-agent verification output is a major token sink and rtk filters it at the source.
 6. **Report format** — require structured data, not prose: files changed, tests run with their actual output, deviations from the spec, open questions. A bare "done" is not a report.
 
