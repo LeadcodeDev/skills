@@ -37,8 +37,10 @@ It exists because the expensive failures in an assisted session are not bad code
 
 - **Triage by blast radius.** Every task is an Iteration, S, M or L, and the ceremony is proportional. Most follow-up turns are Iterations, which get no re-triage, no new spec and no brainstorm.
 - **Three blocking waits, and only three.** An L decomposition, a merge into the default branch, and anything irreversible or outward-facing — the last being a closed list, not a judgement call. Everything else is announced and proceeds.
+- **A question is a question.** "Should we use X?" gets answered, not implemented. This is the one place the speed principle yields: acting instead of answering does not save a round-trip, it spends one, and it spends it on a diff nobody asked for.
+- **Done means done, and met along the way means fixed.** Five things asked for is five things delivered, with the specific blocker named if one is genuinely stuck. Breakage you walk past while doing something else is not a finding — reporting it moves the work back onto the reader's list. What the question itself is about stays an answer.
 - **The spec is the contract.** Before it exists, questions are cheap. After it exists, it is the answer, and a question arising mid-implementation is a defect in the spec to be amended explicitly.
-- **Sub-agents, never git worktrees.** Parallel work is made safe by freezing shared contracts and partitioning files, with the plumbing every feature touches owned by the orchestrator rather than fought over.
+- **Sub-agents, never git worktrees.** Parallel work is made safe by freezing shared contracts and partitioning files, with the plumbing every feature touches owned by the orchestrator rather than fought over. Independent work is dispatched together and the main thread keeps going rather than idling on results.
 - **Architectural drift gets a trigger.** Every other rule judges one change; drift is emergent, so the check fires between changes on observable signals rather than on a calendar nobody keeps.
 
 Git conventions travel with it: conventional commits, no AI attribution anywhere, issues and pull requests opened with reviewers, assignee and labels already set.
