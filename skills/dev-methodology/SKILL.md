@@ -274,7 +274,7 @@ Written once, it is reused three times: it seeds sub-agent briefings (L), the PR
 
 ## Before writing code
 
-- **Identify invariants vs. variables.** Business invariants (e.g. "a revoked token is never accepted") must be encoded in the type system or in tests. Things likely to change (report formats, third-party integrations) must sit behind a clear boundary (a port), never coupled inline.
+- **Identify invariants vs. variables.** Business invariants (e.g. "a revoked token is never accepted") must be encoded in the type system, and in tests only where the type system genuinely cannot carry them. These are not equal options: an `Option` that must never be `None`, guarded by a test that says so, is precisely the state "Make invalid states unrepresentable" exists to forbid. When the type change is right but sits outside the current scope, say that — name it as debt and leave it, rather than presenting the test as the encoding. Things likely to change (report formats, third-party integrations) must sit behind a clear boundary (a port), never coupled inline.
 - **Decide boundaries early, details late.** Fix the domain/ports/adapters frontier first; defer database, transport, and framework choices as long as the boundary allows.
 
 ## Architecture rules
