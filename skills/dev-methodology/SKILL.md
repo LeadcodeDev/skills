@@ -207,11 +207,13 @@ Each reference is loaded when its condition first fires, and not again. Announce
 
 | File | Load when | Never load for |
 |------|-----------|----------------|
-| `references/rust.md` | First architecture or implementation work on a Rust or hexagonal/port-adapter codebase | Reading Rust, reviewing a diff, answering a question about it |
+| `references/rust.md` | First architecture or implementation work on a Rust or hexagonal/port-adapter codebase | Reading Rust, reviewing a diff, explaining code as it stands |
 | `references/orchestration.md` | Before the first sub-agent dispatch of an L feature | S/M work, or a single delegated lookup |
 | `references/git.md` | Planning an L multi-workstream branch topology | Any commit, branch, or PR — those rules are inline in "Git essentials" |
 
 If context was compacted and you cannot tell whether a reference was already loaded, re-read it: a duplicated read costs tokens, a missing rule costs a wrong architecture. Do not re-read merely because a new task started in the same session.
+
+**A question that decides an architecture is architecture work.** "Where should this port live?", "should this invariant sit in the type?" — those load `rust.md`, because its rules are what answer them. The exclusion above covers questions that decide nothing: what the code currently does, why a diff looks like that. Answering a design question without the binding rules on dispatch and port boundaries is the one case where skipping the load changes the answer.
 
 ## Rule zero: read before you write
 
