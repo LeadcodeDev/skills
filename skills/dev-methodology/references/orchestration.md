@@ -1,6 +1,6 @@
 # Sub-Agent Orchestration
 
-Load this file once per session, before the first sub-agent dispatch or L-sized decomposition; re-read only if it was edited since. Use `superpowers:subagent-driven-development` when available as the execution protocol (task sequencing, checkpoints); the rules below govern what every dispatch must contain and how results are accepted — they apply on top of it, or standalone when superpowers is absent.
+Load this file once per session: before decomposing an L feature, and in any case before its first sub-agent dispatch. Re-read it if it was edited since, or if context was compacted and you cannot tell whether it is still in play. Not for S/M work, and not for a single delegated lookup — those are scheduling, not orchestration, and the rules they need are inline in `SKILL.md`. Use `superpowers:subagent-driven-development` when available as the execution protocol (task sequencing, checkpoints); the rules below govern what every dispatch must contain and how results are accepted — they apply on top of it, or standalone when superpowers is absent.
 
 The single most common orchestration failure is the orchestrator assuming a sub-agent "knows" something it never wrote down. A sub-agent wakes up with zero conversation context: it has not seen the user's messages, the decisions made, or the dead ends already explored. Everything it needs must be in the briefing.
 
@@ -8,14 +8,14 @@ The single most common orchestration failure is the orchestrator assuming a sub-
 
 - **Delegate:** sweeps across many files, independent workstreams, exploratory spikes, large mechanical refactors, review passes. Delegation also protects the orchestrator's own context — it keeps conclusions, not file dumps, which matters on long chantiers.
 - **Don't delegate:** single-fact lookups where you already know the file or symbol — read it directly; dispatch overhead exceeds the work.
-- Once work is delegated, never redo it yourself in parallel — wait for the result.
+- Once work is delegated, never redo it yourself in parallel. Take up something that does not depend on it and collect the result when it lands — not redoing it is the rule, going idle is not.
 
 ## Decomposition rules (before any dispatch)
 
 - Each workstream must be independently implementable, reviewable, and testable.
 - **Freeze shared contracts first.** Types, ports, and API shapes that cross workstream boundaries are decided by the orchestrator *before* parallelizing, and are read-only for every sub-agent. This is what prevents two workstreams from silently diverging on an interface.
 - **Partition files.** Every workstream owns a disjoint set of files. Reads may overlap freely; writes never. Overlap on writes is not automatically fatal — classify it first. Substantive overlap, where two workstreams would edit the same logic, means the decomposition is wrong: merge them. Incidental overlap on shared plumbing does not (see "Convergence points").
-- **No git worktrees** — manual or tool-managed. Isolation does not resolve a source conflict, it defers it into a merge conflict — strictly more work than applying known additive edits in one pass. What it would buy is workspace isolation: build directories, lockfiles, test databases, ports. Remove that contention directly (distinct target dirs, distinct database names, dynamic ports) rather than duplicating the workspace. Available isolation is also what lets a decomposition skip contract freezing: divergence across isolated checkouts is silent until merge, whereas a file collision is loud and immediate. If partitioning is impossible, the work was not parallelizable — serialize.
+- **No git worktrees** — manual or tool-managed. Isolation does not resolve a source conflict, it defers it into a merge conflict — strictly more work than applying known additive edits in one pass. What it would buy is workspace isolation: build directories, lockfiles, test databases, ports. Remove that contention directly (distinct target dirs, distinct database names, dynamic ports) rather than duplicating the workspace. Available isolation is also what tempts a decomposition into skipping contract freezing — a temptation, never a licence, since freezing is required either way: divergence across isolated checkouts is silent until merge, whereas a file collision is loud and immediate. If partitioning is impossible, the work was not parallelizable — serialize.
 
 ## Convergence points
 
@@ -96,7 +96,7 @@ Every dispatch contains all six sections. A sub-agent that has to guess will gue
 1. **Mission** — one sentence.
 2. **Context** — decisions already made and *why*, state of sibling workstreams, anything from the conversation the sub-agent needs. It cannot see the conversation.
 3. **Frozen contracts** — the types/ports/API shapes it must not modify, verbatim or by exact file path.
-4. **Scope** — the files it owns, the files it must not touch, and the orchestrator-owned convergence points it reports against instead of editing.
+4. **Scope** — the files it owns, the files it must not touch, and the orchestrator-owned convergence points it reports against instead of editing. An agent that writes nothing — a review lens, an audit pass — owns no files: write **writes no files, reports only** in this slot rather than leaving it empty. An empty scope reads as unspecified, not as forbidden, and a sub-agent reads its briefing rather than the methodology — so this slot is the only place the rule can reach it.
 5. **Verification** — the exact commands to run before reporting done (seeded from the mini-spec's `Verify` line). When the environment provides `rtk`, write them in their `rtk`-prefixed form — sub-agent verification output is a major token sink and rtk filters it at the source.
 6. **Report format** — require structured data, not prose: files changed, tests run with their actual output, deviations from the spec, open questions. A bare "done" is not a report.
 
