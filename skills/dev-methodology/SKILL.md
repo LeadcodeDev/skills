@@ -41,7 +41,7 @@ Ceremony must be proportional to blast radius. Classify the task before starting
 | **M** | One coherent feature or fix, reviewable as a single PR | Mini-spec (below) + proportional TDD on a single feature branch. No orchestration. |
 | **L** | Feature spanning several independently reviewable sub-features | Brainstorm → decompose into workstreams → orchestrate sub-agents. Read `references/orchestration.md` before decomposing: its rules on freezing contracts and partitioning files apply while you decompose, not after. |
 
-When in doubt between two sizes, pick the smaller and say so — but only among the sizes the task qualifies for, since a size whose own definition rules it out is not a candidate. It licenses no inflation either: a task is not L because it feels big, and L is the only size that buys a blocking wait. If the task grows mid-flight, escalate explicitly — never silently.
+When in doubt between two sizes, pick the smaller and say so — but only among the sizes the task qualifies for, since a size whose own definition rules it out is not a candidate. It licenses no inflation either: a task is not L because it feels big. Size buys a wait only at L, and only that one — the other two blocking waits fire at every size, S included. If the task grows mid-flight, escalate explicitly — never silently.
 
 ## One planning pass, ever
 
@@ -74,13 +74,13 @@ Contents: the size class, the branch plan (name, target), and — for M — the 
 
 The user reads it while you work. Interrupting is their move, not a step in yours.
 
-**The only three blocking waits in this methodology:** an L decomposition or branch plan, any merge into the default branch, and anything irreversible or outward-facing.
+**The only three blocking waits in this methodology:** an L decomposition or its branch plan, any merge into the default branch, and anything irreversible or outward-facing.
 
 That third one is a closed list, not a judgement call — deletions, force-pushes, schema migrations against shared environments, spending money, and any action other people can see: sending mail, posting to a shared channel, publishing a package, opening a public issue. If the situation is not on that list, there is no wait.
 
 **Two other things end a turn, and they are not on that list because they are not approval.** The kickoff batch ("Project kickoff") and a requirement you genuinely cannot read ("Rule zero") ask the user for an *answer*; the three above ask for *permission*. You are not seeking agreement with a plan, you are missing an input.
 
-That pair is closed too — exactly those two, on those grounds. Neither is available because a task feels large, consequential, or worth a second opinion. And kickoff fires *before* the opening announcement rather than interrupting it, so "do not end that turn" is not in conflict with it: there is no turn to end yet.
+That pair is closed too — exactly those two, on those grounds. Neither is available because a task feels large, consequential, or worth a second opinion. Handing back a decision that is genuinely the user's is a third thing and not a wait at all: the work up to it is finished and reported, so the turn ends because it is done, not because it is paused. And kickoff fires *before* the opening announcement rather than interrupting it, so "do not end that turn" is not in conflict with it: there is no turn to end yet.
 
 ## A question is a question
 
@@ -124,7 +124,7 @@ Not half done. Not done except for the part you decided to skip. And, when the t
 
 Five things asked for is five things delivered. Neither length nor the end of a turn is a reason to stop at three and present it as complete: carry on rather than hand back a partial result dressed as a finished one. Outgrowing the size you announced is not a reason either — escalate the size explicitly, and keep going.
 
-Delivered means verified. What closes a task is the exit block from the mini-spec, not a count of items: five things done and unverified is not done.
+Delivered means verified. What closes a task is its verification, not a count of items — the exit block for M and larger, and for S the check named in the opening announcement. Five things done and unverified is not done.
 
 If one of the five is genuinely blocked, finish the other four and name the blocker in one sentence. The **specific** blocker: the command that fails and its error, the credential that is missing, the decision only the user can make. "This needs more investigation" names nothing — it is the absence of a blocker, and it hands the work back for the user to re-scope.
 
