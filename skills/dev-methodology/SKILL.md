@@ -39,9 +39,9 @@ Ceremony must be proportional to blast radius. Classify the task before starting
 |------|------------|---------|
 | **S** | Obvious scope: roughly ≤ 3 files, no API/contract change, cause and fix both clear | No brainstorm, no spec, no validation wait. Regression test + fix on a feature branch. |
 | **M** | One coherent feature or fix, reviewable as a single PR | Mini-spec (below) + proportional TDD on a single feature branch. No orchestration. |
-| **L** | Feature spanning several independently reviewable sub-features | Brainstorm → decompose into workstreams → orchestrate sub-agents. Read `references/orchestration.md` before dispatching anything. |
+| **L** | Feature spanning several independently reviewable sub-features | Brainstorm → decompose into workstreams → orchestrate sub-agents. Read `references/orchestration.md` before decomposing: its rules on freezing contracts and partitioning files apply while you decompose, not after. |
 
-When in doubt between two sizes, pick the smaller and say so — but only among the sizes the task actually qualifies for. A size whose own definition rules the task out is not a candidate: a change to an API or a contract is never S, however small the diff, because the S row excludes it by name. The tiebreaker settles genuine ties; it does not overrule the column that defines them. If the task grows mid-flight, escalate explicitly — never silently.
+When in doubt between two sizes, pick the smaller and say so — but only among the sizes the task qualifies for, since a size whose own definition rules it out is not a candidate. It licenses no inflation either: a task is not L because it feels big, and L is the only size that buys a blocking wait. If the task grows mid-flight, escalate explicitly — never silently.
 
 ## One planning pass, ever
 
@@ -78,7 +78,9 @@ The user reads it while you work. Interrupting is their move, not a step in your
 
 That third one is a closed list, not a judgement call — deletions, force-pushes, schema migrations against shared environments, spending money, and any action other people can see: sending mail, posting to a shared channel, publishing a package, opening a public issue. If the situation is not on that list, there is no wait.
 
-**Two other things end a turn, and they are not on that list because they are not approval.** The kickoff batch ("Project kickoff") and a requirement you genuinely cannot read ("Rule zero") ask the user for an *answer*. The three above ask for *permission*. The difference is decidable: without the answer you cannot start, while without the permission you could start and are choosing not to. That is why the list of three stays closed — it governs permission, and nothing else may join it. It is also why these two do not widen anything: neither is available on the ground that a task feels large, consequential, or worth a second opinion.
+**Two other things end a turn, and they are not on that list because they are not approval.** The kickoff batch ("Project kickoff") and a requirement you genuinely cannot read ("Rule zero") ask the user for an *answer*; the three above ask for *permission*. You are not seeking agreement with a plan, you are missing an input.
+
+That pair is closed too — exactly those two, on those grounds. Neither is available because a task feels large, consequential, or worth a second opinion. And kickoff fires *before* the opening announcement rather than interrupting it, so "do not end that turn" is not in conflict with it: there is no turn to end yet.
 
 ## A question is a question
 
@@ -133,7 +135,7 @@ If one of the five is genuinely blocked, finish the other four and name the bloc
 | "This follow-up deserves a proper spec" | It's an Iteration. The existing mini-spec holds. |
 | "I'll post the plan and wait for a go-ahead" | S/M announcements never wait. Announce and start in the same turn. |
 | "Let me brainstorm before writing the mini-spec" | One planning pass. For M, the mini-spec is the plan. |
-| "The user might want to weigh in first" | Interrupting is their move. Only three situations block, and the third is a closed list. |
+| "The user might want to weigh in first" | Interrupting is their move. Three ask permission, two ask a question, and both lists are closed. |
 | "Let me re-read git.md before this commit" | Routine Git rules are inline. Once per session, L topology only. |
 | "The PR is already open, its description stands" | Every commit can invalidate it. Re-read it before pushing. |
 | "They asked about X, so they want X built" | A question is a question. Answer it; act on go. |
@@ -185,7 +187,7 @@ If the environment does not allow model selection or per-sub-agent model assignm
 
 - **TDD, proportional.** New behavior gets the full red → green → refactor loop — via the superpowers TDD skill when installed, manually otherwise. Iteration on already-tested code gets targeted tests during the loop and one full-suite run at the end. Either way, never accumulate large amounts of unverified code.
 - **One planning pass, ever.** See the dedicated section above — it is a hard rule, not a preference.
-- **Sub-agents, never git worktrees.** Parallel or isolated work is delegated to sub-agents briefed per `references/orchestration.md`. Never create git worktrees — manual or tool-managed. Parallel writes are made safe by strict file partitioning (see orchestration.md), not by workspace duplication.
+- **Sub-agents, never git worktrees.** Parallel or isolated work is delegated to sub-agents. An L feature briefs them per `references/orchestration.md`; a one-off S/M dispatch does not load that file, but still owes its agent a mission, a scope and a report format inline. Never create git worktrees — manual or tool-managed. Parallel writes are made safe by strict file partitioning (see orchestration.md), not by workspace duplication.
 - **Route shell commands through RTK when available.** `rtk` is a token-optimizing proxy for dev operations (git, builds, test runs) that filters verbose output — typically 60–90% fewer tokens for the same signal. If the environment provides it (check with `rtk --version`; a hook may already rewrite commands transparently), prefer it over raw commands. Fall back to `rtk proxy <cmd>` only when the full unfiltered output is genuinely needed, e.g. while debugging.
 
 ## Working in parallel (Opus 5)
@@ -209,13 +211,13 @@ Each reference is loaded when its condition first fires, and not again. Announce
 
 | File | Load when | Never load for |
 |------|-----------|----------------|
-| `references/rust.md` | First architecture or implementation work on a Rust or hexagonal/port-adapter codebase | Reading Rust, reviewing a diff, explaining code as it stands |
-| `references/orchestration.md` | Before the first sub-agent dispatch of an L feature | S/M work, or a single delegated lookup |
+| `references/rust.md` | First architecture or implementation work on a Rust or hexagonal/port-adapter codebase | Reading Rust, summarizing a diff, explaining code as it stands |
+| `references/orchestration.md` | Before decomposing an L feature, and in any case before its first dispatch | S/M work, or a single delegated lookup |
 | `references/git.md` | Planning an L multi-workstream branch topology | Any commit, branch, or PR — those rules are inline in "Git essentials" |
 
 If context was compacted and you cannot tell whether a reference was already loaded, re-read it: a duplicated read costs tokens, a missing rule costs a wrong architecture. Do not re-read merely because a new task started in the same session.
 
-**A question that decides an architecture is architecture work.** "Where should this port live?", "should this invariant sit in the type?" — those load `rust.md`, because its rules are what answer them. The exclusion above covers questions that decide nothing: what the code currently does, why a diff looks like that. Answering a design question without the binding rules on dispatch and port boundaries is the one case where skipping the load changes the answer.
+**A question that decides an architecture is architecture work.** "Where should this port live?", "should this invariant sit in the type?" — those load `rust.md`, because its rules are what answer them. So does reviewing a diff *for conformance* to them, which is where they bind hardest. The exclusion covers reading and recounting, where nothing is decided and nothing is judged. When you cannot tell which side you are on, ask what the load would change: if it would change the verdict, load it.
 
 ## Rule zero: read before you write
 
@@ -228,7 +230,7 @@ Before producing or modifying code:
 
 If the problem cannot be restated in two plain sentences, it is not yet understood. When the requirement itself is genuinely ambiguous — you cannot tell what is being asked — restate it and ask. That is a question about the request, not approval for a plan.
 
-This is the answer-not-permission case named under the blocking waits: you cannot start, because you do not know what to start on. Ambiguity is self-declared, so it is the easiest gate in the document to reach for dishonestly — it holds only when you can say which reading you cannot choose between. "I would like to check my approach" is not ambiguity.
+Ambiguity is self-declared, so it is the easiest gate in the document to reach for dishonestly. It holds when you can name the readings you cannot choose between, or say exactly what is missing — a document the ticket refers to and you do not have, a domain term nothing in the repository defines. It never covers understanding the request and wanting agreement about it: "I would like to check my approach" is not ambiguity. And this bar is for the requirement as a whole. The spec-phase batch above has a far lower one — anything you would otherwise guess — and nothing here raises it.
 
 Consequence is already covered by the third blocking wait above, and that list is closed. Rule zero does not add a second, vaguer trigger for it: a task that feels weighty but appears nowhere on that list calls for reading more carefully, not for pausing.
 
@@ -262,7 +264,7 @@ Before writing code for anything M or larger, write a mini-spec — a handful of
 
 ```
 Goal:         <one sentence>
-Invariants:   <business rules that must hold — encoded in types or tests>
+Invariants:   <business rules that must hold — in types; tests only where types cannot>
 Out of scope: <what this change explicitly does not do>
 Acceptance:   <observable checks proving it works>
 Modules:      <bounded contexts touched — a change spanning many is misplaced, not large>
@@ -274,7 +276,7 @@ Written once, it is reused three times: it seeds sub-agent briefings (L), the PR
 
 ## Before writing code
 
-- **Identify invariants vs. variables.** Business invariants (e.g. "a revoked token is never accepted") must be encoded in the type system, and in tests only where the type system genuinely cannot carry them. These are not equal options: an `Option` that must never be `None`, guarded by a test that says so, is precisely the state "Make invalid states unrepresentable" exists to forbid. When the type change is right but sits outside the current scope, say that — name it as debt and leave it, rather than presenting the test as the encoding. Things likely to change (report formats, third-party integrations) must sit behind a clear boundary (a port), never coupled inline.
+- **Identify invariants vs. variables.** Business invariants (e.g. "a revoked token is never accepted") must be encoded in the type system, and in tests only where the type system genuinely cannot carry them. These are not equal options: an `Option` that must never be `None`, guarded by a test that says so, is precisely the state "Make invalid states unrepresentable" exists to forbid. What is banned is a test *standing in for* a type that could have carried the rule — not testing itself. Exercising behavior the type already guarantees, or writing a regression before its fix, is ordinary testing and stays required. When the type change is right but sits outside the current scope, say that: name it as debt, leave it, and open it as its own issue if it earns one — do not present the test as the encoding. Things likely to change (report formats, third-party integrations) must sit behind a clear boundary (a port), never coupled inline.
 - **Decide boundaries early, details late.** Fix the domain/ports/adapters frontier first; defer database, transport, and framework choices as long as the boundary allows.
 
 ## Architecture rules
