@@ -41,7 +41,7 @@ Ceremony must be proportional to blast radius. Classify the task before starting
 | **M** | One coherent feature or fix, reviewable as a single PR | Mini-spec (below) + proportional TDD on a single feature branch. No orchestration. |
 | **L** | Feature spanning several independently reviewable sub-features | Brainstorm → decompose into workstreams → orchestrate sub-agents. Read `references/orchestration.md` before dispatching anything. |
 
-When in doubt between two sizes, pick the smaller and say so; if the task grows mid-flight, escalate explicitly — never silently.
+When in doubt between two sizes, pick the smaller and say so — but only among the sizes the task actually qualifies for. A size whose own definition rules the task out is not a candidate: a change to an API or a contract is never S, however small the diff, because the S row excludes it by name. The tiebreaker settles genuine ties; it does not overrule the column that defines them. If the task grows mid-flight, escalate explicitly — never silently.
 
 ## One planning pass, ever
 
