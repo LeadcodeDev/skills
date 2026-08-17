@@ -19,15 +19,7 @@ Load this file before the first architecture or implementation work on a codebas
 
 - Import the item, call it bare. Every type, trait, and free function used in a file gets a `use` at the top; the call site carries the shortest path possible. Fully-qualified inline paths are noise repeated at every occurrence.
 
-```rust
-// Avoid
-let t = tokio::time::Instant::now();
-
-// Prefer
-use tokio::time::Instant;
-
-let t = Instant::now();
-```
+Avoid `let t = tokio::time::Instant::now();`. Prefer `use tokio::time::Instant;` at the top of the file, then `let t = Instant::now();` at the call site.
 
 - Two exceptions, both about ambiguity: on a name collision (`io::Error` vs `fmt::Error`), import the parent module and qualify (`io::Error`) or alias explicitly (`use std::io::Error as IoError`) — never leave the reader guessing which one is in scope. On a bare name that says nothing on its own (`Handle`, `Config`, `Builder`), keep the parent module as the qualifier.
 - Enum variants are imported when the enum is the file's subject (`use Direction::*` inside its own module), qualified otherwise.
@@ -36,7 +28,7 @@ let t = Instant::now();
 ## Type-driven invariants
 
 - Make invalid states unrepresentable: newtypes for identifiers and secrets, exhaustive enums for state machines, `NonZero*`/`Option` instead of sentinel values.
-- Never ignore a `Result`. `.unwrap()`/`.expect()` are acceptable only in tests, examples, and provably-infallible cases — with a comment stating why.
+- Never ignore a `Result`. `.unwrap()`/`.expect()` are acceptable only in tests, examples, and provably-infallible cases — with the inline claim "Writing code" asks for: what makes this call infallible, not that it is. That claim, a `SAFETY:` block, and the reason on `#[allow(…)]`, `#[expect(…)]` or `#[rustfmt::skip]` are the only comments a function body carries.
 - Use `#[must_use]` on types and functions whose result being dropped is a bug.
 - Sensitive material (keys, tokens, passwords) gets deterministic cleanup: `zeroize` on drop, no `Debug`/`Display` derivation, no accidental logging.
 
