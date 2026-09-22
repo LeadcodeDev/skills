@@ -1,11 +1,12 @@
 {
-  "skill_name": "writing-article",
+  "skill_name": "writing",
   "evals": [
     {
       "id": 0,
       "name": "cargo-lock-investigation",
+      "platform": "explainer",
       "prompt": "on a eu un souci relou cette semaine sur natalia — j'ai lancé plusieurs agents en parallèle sur apps/server et ils se bloquaient tous mutuellement au moment des tests. j'ai fini par comprendre que c'était cargo qui pose un lock sur target/. ça mériterait un article sur le blog, genre pourquoi paralléliser des agents sur du rust c'est pas si simple. tu peux me le rédiger ?",
-      "expected_output": "MDX article in apps/blog with inline sources on the cargo locking mechanism, no invented benchmark figures, a reliability callout stating what was verified against which cargo version and what was not.",
+      "expected_output": "MDX article in apps/blog with inline sources on the cargo locking mechanism, no invented benchmark figures, and what could not be verified disclosed in the prose where the claim sits.",
       "files": [],
       "assertions": [
         "Article saved as .mdx under apps/blog/src/content/posts/{locale}/",
@@ -35,6 +36,7 @@
     {
       "id": 1,
       "name": "rsc-from-two-links",
+      "platform": "explainer",
       "prompt": "je veux un article sur les React Server Components pour le blog. j'ai que ces deux liens sous la main : https://react.dev/reference/rsc/server-components et la doc Next sur l'App Router. me fais pas un truc générique hein, je veux du concret sur ce qui change vraiment pour quelqu'un qui vient de Next 14.",
       "expected_output": "MDX article that stays within the supplied sources or explicitly flags where it went beyond them, with prerequisites and at least one counter-argument covered.",
       "files": [],
@@ -66,8 +68,9 @@
     {
       "id": 2,
       "name": "contradictory-benchmarks",
+      "platform": "explainer",
       "prompt": "écris moi un post de blog qui compare les perfs de bun et node sur du serveur http. j'ai vu passer plein de benchmarks contradictoires là dessus et j'aimerais y voir clair.",
-      "expected_output": "MDX article that does not launder tertiary benchmark claims, distinguishes measured facts from inference, and uses the reliability callout to name what could not be verified.",
+      "expected_output": "MDX article that does not launder tertiary benchmark claims, distinguishes measured facts from inference, and names what could not be verified where the claim sits.",
       "files": [],
       "assertions": [
         "Article saved as .mdx under apps/blog/src/content/posts/{locale}/",
@@ -93,6 +96,79 @@
         "No em dash outside quoted material",
         "French register: que l'on throughout, never qu'on",
         "The author's own work carries the article; external sources support rather than lead"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "keycloak-migration-linkedin",
+      "platform": "linkedin",
+      "prompt": "un post linkedin sur ça : bon on a fini par virer Keycloak de notre stack sur FerrisKey. ça faisait des mois que ça nous saoulait, la conso mémoire de la JVM était délirante sur nos petits nœuds, et la config XML/JSON pour les realms c'était l'enfer à versionner. on a réécrit la partie auth en Rust. résultat l'image docker est passée de qqch comme 700Mo à un truc genre 30Mo, et le démarrage c'est quasi instantané maintenant au lieu d'attendre. par contre on a perdu plein de features, le SSO SAML on l'a pas encore, et honnêtement pour une boîte qui a déjà une équipe qui connaît Keycloak je suis pas sûr que ça vaille le coup de migrer.",
+      "expected_output": "Plain-text French LinkedIn post following the seven-beat arc, in which every judgement aimed at Keycloak or the JVM in the notes has been converted into a constraint the author had.",
+      "files": [],
+      "assertions": [
+        "The post is shown in the conversation; no file is written",
+        "Plain text only: no markdown bold, no headings, no markdown link syntax",
+        "No hashtag appears anywhere",
+        "Nothing follows the closing invitation: no commentary on choices, no meta-text, no offer to adjust",
+        "No dash of any kind is used as punctuation, em dash and hyphen included",
+        "The change list uses the emoji bullet, and no other emoji appears in the post",
+        "No emoji appears inside a sentence",
+        "Paragraphs are one to three lines, separated by blank lines",
+        "Keycloak, the JVM and Java are never described as bad, heavy, painful or exasperating",
+        "The memory and versioning grievances are restated as the author's own constraints, not as defects of the tool",
+        "The author criticises his own past work or decisions somewhere in the post",
+        "The post contains an external triggering event, not an epiphany or a realisation",
+        "If the notes contain no external triggering event, one is asked for rather than invented; no plausible placeholder event appears in the post",
+        "The post ends on an open question addressed to readers who did something similar",
+        "The 700 Mo and 30 Mo figures stay as approximate as they are in the notes; no percentage or precise ratio is computed",
+        "No timing figure is invented for the startup improvement",
+        "The lost features and the missing SAML SSO are stated, not omitted",
+        "The caveat that migrating may not be worth it for a team that knows Keycloak survives into the post",
+        "No prerequisites section, no developed counter-argument section, no open-questions section",
+        "Spoken register: qu'on is acceptable here and the prose does not read as written essay French"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "ci-rework-no-numbers",
+      "platform": "linkedin",
+      "prompt": "tu me fais un post linkedin là dessus : j'ai passé le week-end à refaire la CI de FerrisKey. avant chaque PR déclenchait un build complet de tout le workspace Rust, c'était super long. j'ai mis en place du cache sur les artefacts cargo et découpé les jobs. maintenant ça va beaucoup plus vite. j'ai aussi viré des tests qui testaient rien.",
+      "expected_output": "Plain-text French LinkedIn post that invents no speed figure, since the notes contain none, and says so plainly rather than hedging.",
+      "files": [],
+      "assertions": [
+        "The post is shown in the conversation; no file is written",
+        "Plain text only: no markdown bold, no headings, no markdown link syntax",
+        "No hashtag appears anywhere",
+        "Nothing follows the closing invitation: no commentary on choices, no meta-text, no offer to adjust",
+        "No dash of any kind is used as punctuation, em dash and hyphen included",
+        "The change list uses the emoji bullet, and no other emoji appears in the post",
+        "Paragraphs are one to three lines, separated by blank lines",
+        "No duration, percentage or speedup figure appears anywhere, because the notes contain none",
+        "The absence of a proper measurement is stated plainly in the author's voice, not hedged into vagueness",
+        "The post contains an external triggering event, not an epiphany or a realisation",
+        "If the notes contain no external triggering event, one is asked for rather than invented; no plausible placeholder event appears in the post",
+        "The post ends on an open question addressed to readers who did something similar",
+        "No CI provider, language or tool is described as bad or slow; slowness is attributed to the setup the author built",
+        "The author criticises his own past work or decisions somewhere in the post",
+        "The deleted tests are framed as the author's own earlier mistake, not as someone else's",
+        "No prerequisites section, no developed counter-argument section, no open-questions section",
+        "Spoken register: qu'on is acceptable here and the prose does not read as written essay French"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "platform-not-stated",
+      "platform": "ambiguous",
+      "prompt": "j'ai fini la refonte du système de webhooks sur FerrisKey ce week-end, retry avec backoff exponentiel, signature HMAC, et une UI pour rejouer les livraisons échouées. faudrait que j'écrive un truc dessus.",
+      "expected_output": "The platform is asked before any drafting or research happens, because the request names neither blog nor LinkedIn and the two produce incompatible pieces.",
+      "files": [],
+      "assertions": [
+        "The platform is asked before drafting begins",
+        "The platform is asked before any research or source gathering is done",
+        "No draft, outline or MDX frontmatter is produced before the answer",
+        "No file is written before the answer",
+        "The question is asked once and does not come bundled with a full draft of both variants",
+        "The question distinguishes the Explainer blog from LinkedIn in terms the user can answer without reading the skill"
       ]
     }
   ]
