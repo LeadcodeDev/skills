@@ -108,8 +108,8 @@ Reaching for a component is an editorial decision; writing it correctly is a syn
 - **Callout** — a caveat or a breaking change the reader must not miss at that point in the argument. Not for disclosure of thin evidence: that belongs in the sentence, in your voice.
 - **Card Group + Card** — a collection of links that are genuinely alternatives to each other. Two cards is usually a list in disguise.
 - **Steps** — something the reader performs in order, where doing step three before step two fails.
-- **Code Group** — the same thing expressed several ways, side by side.
-- **Tabs** — package manager or config variants of one instruction.
+- **Code Group** — the same thing expressed several ways, side by side. Package-manager variants live here.
+- **Tabs** — only when a tab holds prose as well as code. If every tab is a bare code block, Code Group does the same job as a directive, with no client-side hydration to pay for.
 
 Default to prose. Every component is a decision the reader has to parse before they can read, and an article built from containers reads as documentation.
 

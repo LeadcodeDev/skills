@@ -98,11 +98,11 @@ The `title` attribute works only in JSX syntax.
 
 ### Gotchas
 
-- **`title` in directive syntax is silently ignored.** `:::callout{variant="info" title="My Title"}` renders without the title and gives no error. Use `<Callout variant="info" title="…">` when you need one.
+- **`title` in directive syntax is silently ignored.** `:::callout{variant="info" title="My Title"}` renders without the title and gives no error. Use `<Callout variant="info" title="...">` when you need one.
 - **Missing closing `:::`.** The directive never closes; everything after it is swallowed into the callout or breaks the page.
-- **Wrong colon count.** `::callout{…}` with two colons is not recognized. Directives require 3+ colons.
+- **Wrong colon count.** `::callout{...}` with two colons is not recognized. Directives require 3+ colons.
 - **Invalid variant value.** `variant="note"` is not valid. Only `info`, `success`, `warning`, `danger`.
-- **Faking a title with bold text.** `**Warning:** …` as the first line works visually but is just bold content, not a semantic title. Use the JSX `title` prop instead.
+- **Faking a title with bold text.** `**Warning:** ...` as the first line works visually but is just bold content, not a semantic title. Use the JSX `title` prop instead.
 - **Import statements.** Never write `import { Callout } from '@explainer/mdx'`. All components are auto-imported.
 
 ---
@@ -223,7 +223,7 @@ Rich content — paragraphs and links — works the same way:
 ````mdx
 ::::step-group
   :::step{title="Create a GitHub repository"}
-  Go to [github.com/new](https://github.com/new) and create a new repository. You can leave it empty — Explainer will push the initial commit.
+  Go to [github.com/new](https://github.com/new) and create a new repository. You can leave it empty: Explainer will push the initial commit.
   :::
 
   :::step{title="Push your code"}
@@ -570,14 +570,14 @@ Over 60 languages are supported and display their icon automatically from the la
 | Component | Opening syntax | Colons | Closes with |
 |-----------|----------------|--------|-------------|
 | Callout | `:::callout{variant="info"}` | 3 | `:::` |
-| Callout with title | `<Callout variant="info" title="…">` | — | `</Callout>` |
+| Callout with title | `<Callout variant="info" title="...">` | — | `</Callout>` |
 | Card Group | `::::card-group{cols=2}` | 4 | `::::` |
-| Card | `:::card{label="…" icon="lucide:…" href="…"}` | 3 | `:::` |
+| Card | `:::card{label="..." icon="lucide:..." href="..."}` | 3 | `:::` |
 | Step Group | `::::step-group` | 4 | `::::` |
-| Step | `:::step{title="…"}` | 3 | `:::` |
+| Step | `:::step{title="..."}` | 3 | `:::` |
 | Code Group | `:::codegroup` | 3 | `:::` |
-| Tabs | `<Tabs items={[…]} client:load>` | — | `</Tabs>` |
-| Tab | `<Tab label="…">` | — | `</Tab>` |
+| Tabs | `<Tabs items={[...]} client:load>` | — | `</Tabs>` |
+| Tab | `<Tab label="...">` | — | `</Tab>` |
 
 ### Code block annotations
 
