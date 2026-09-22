@@ -8,21 +8,49 @@ The register is spoken French, first person, closer to a good Reddit post than t
 
 ## The arc
 
-Seven beats, in this order. They are slots to fill, not headings to write, and the post contains all seven.
+Seven beats, in this order. They are slots to fill, not headings to write.
 
-1. **L'aveu** — situate yourself in time and in mood, and admit something. Not a hook engineered to stop the scroll: an actual admission, which stops it better. *"Petite confession (en retard d'une journée) d'un dev un dimanche soir"*
+Five carry the post on their own: 2, 3, 5, 6, 7. **Beats 1 and 4 are conditional**, and the condition is factual rather than stylistic — you write them when the raw material contains something real to put in them, and you leave them out when it does not. A manufactured admission and an invented triggering event are worse than their absence, because both are exactly the kind of specific a reader remembers, repeats, and eventually checks.
+
+1. **L'aveu** *(conditional)* — situate yourself in time and in mood, and admit something. Not a hook engineered to stop the scroll: an actual admission, which stops it better.
+
+   **Do not open on "Petite confession…", and do not reach for its variants** — "Confession de…", "Aveu de…", "Petit aveu…". That phrasing belonged to one post, occasionally, and it was the author's. Repeated, it stops being a voice and becomes a format, which is the one thing this beat cannot afford. The slot asks for an admission, not for a word announcing that one is coming.
+
+   Treat that as a hard constraint rather than a preference. An earlier version of this file quoted the phrase as a harmless "sample of register"; the next draft written against it opened on *"Confession d'un lendemain de chantier"*. A caveat in prose does not survive contact with a concrete example — the example wins.
+
+   Openings that work are structurally unalike, and that is the point:
+
+   - the admission first, flat, no preamble: *"J'ai vérifié le travail de onze agents et pas une ligne du mien."*
+   - the situation, with the admission landing after it: *"Deux jours de chantier. Ce qui a failli tout casser n'était pas dans le code qu'on auditait."*
+   - the bare fact, left to do the work: *"Mon script avait un mode d'échec silencieux. Je l'ai découvert le dernier jour."*
+
+   These are not templates either. The test is portability: if the opening could be lifted onto someone else's post without changing a word, it is a formula, not an aveu.
+
+   With nothing genuine to admit, drop the beat and open on the finding instead. An admission you had to reach for reads as false modesty, and it costs more than a plain opening would have.
 2. **Le constat** — what was genuinely wrong, stated flatly, followed immediately by the circumstance that makes it fair rather than damning. The excuse is not softening, it is accuracy: most bad states have ordinary causes.
 3. **La conséquence** — one concrete thing that suffered, named specifically. A module nobody found, a velocity you lost, a contributor who gave up. One. A list of consequences reads as a complaint.
-4. **Le déclic** — an *external event* that forced the issue: an issue opened by a stranger, a question in a review, a migration that would not run. Never an epiphany, never "j'ai réalisé que". An epiphany is unverifiable and reads as narrative furniture; an event is a fact and it is what makes the post a story rather than an announcement.
+4. **Le déclic** *(conditional)* — an *external event* that forced the issue. An issue opened by a stranger, a question in a review, a migration that would not run, a CI job that went red: **the shape is what qualifies, not the list**. Anything that reached you from outside and made the problem impossible to keep postponing belongs here. Never an epiphany, never "j'ai réalisé que" — an epiphany is unverifiable and reads as narrative furniture, while an event is a fact, and that is what makes the post a story rather than an announcement.
 
-   **If the notes contain no such event, ask the user for one. Never supply it.** The déclic is a specific like any other, and the arc requiring the slot is not a licence to fill it — a plausible triggering event is still an invented one, and it is the single most quotable sentence in the post. Flagging the invention afterwards does not repair it: the user reads a finished post and approves the shape, not the provenance of each beat. Ask, and write the rest while you wait.
+   **Vague temporal markers do the same damage as an epiphany.** "Un jour", "récemment", "il y a quelque temps" demote a dated fact to an anecdote, and they are exactly where an invented event hides, because they excuse the writer from ever saying when. Lead with the event instead: *"Mon backend métier était éteint quand FerrisKey a envoyé la mise à jour d'une identité, un changement de prénom et de nom"* carries the same facts as the version opening on "Un jour", and the reader believes it. Give the date when it decides something, say nothing when it does not, and never gesture at time in between.
 
-   Leave the beat in the draft as a bracketed marker, `[DÉCLIC : l'événement extérieur, à me donner]`, rather than closing the gap or omitting the beat. A marker cannot be pasted by accident; a missing beat is invisible, and a smoothed-over one is a fabrication.
-5. **Ce qu'on a changé** — the `👉` list. One line per change, no sub-bullets, five items at the outside.
+   **Never supply the event.** It is a specific like any other, it is usually the most quotable sentence in the post, and an invented one therefore does the most damage. The arc offering a slot is not a licence to fill it, and flagging the invention afterwards does not repair anything: the user reads a finished post and approves its shape, not the provenance of each beat.
+
+   So when the raw material carries no such event, there are two honest moves and inventing is neither. **Omit the beat** — that is the default, and it costs the post less than people expect. Or, when the piece is visibly weaker without it, **ask the user** and leave `[DÉCLIC : l'événement extérieur, à me donner]` in the draft while you wait, writing the rest meanwhile. A marker cannot be pasted by accident; a smoothed-over gap can.
+5. **Ce qu'on a changé** — the `👉` list, **and the sentence that leads into it**. The beat is named after that sentence, and it is the half that goes missing: the body says "the list", so a generator emits the list cold and the reader falls from the damage straight into bullets with nothing bridging them.
+
+   The lead-in does connective work rather than announcing a list. *"J'ai changé cinq choses :"* clears the bar. *"Voici les améliorations apportées :"* is a heading wearing a sentence's clothes, and it adds nothing the bullets do not already say. The strongest form points the fix back at the consequence you just described, which is what stops the list reading as a changelog:
+
+   > Ma table users n'a jamais vu passer ce changement. Je m'en suis rendu compte après coup, sans la moindre alerte.
+   >
+   > Depuis, plus rien ne repose sur le fait que l'autre bout réponde :
+   >
+   > 👉 Retry automatique quand l'envoi échoue
+
+   Then one line per change, no sub-bullets, five items at the outside.
 6. **La leçon** — one sentence, standing alone. If it needs two, it is not yet a lesson.
 7. **L'invitation** — an open question to people who have done the same thing. Genuinely open: something you do not already know the answer to.
 
-Beat 4 is the one that goes missing. A post without it is a changelog with feelings.
+Beat 4 is the one worth fighting for. It is what separates a story from a changelog with feelings, so when an external event does exist in the raw material, find it and use it rather than settling for the five load-bearing beats. Making it conditional is there to stop it being invented, not to make it optional in spirit.
 
 ---
 
@@ -71,6 +99,7 @@ The blog's five coverage items do not survive a 2000-character post. Two of them
 
 ## Form
 
+- **Full clauses, with a verb in each.** Verbless fragments dropped in for punch are advertising rhythm, not spoken French: *"Personne pour le recevoir."*, *"Cinquante-cinq PR au total."*, *"Aucune alerte. Rien."* Someone telling you what happened says *"Personne n'était présent pour le recevoir."* The fragment reads as written to be read; the clause reads as said. This is the tic that survives every other rule here, because it feels like tightening.
 - **Zero dashes.** No `—`, no `–`, no `-` used as punctuation. Comma, colon, period, or a line break. This is absolute, quoted material included, because a post quotes nothing.
 - **One to three lines per paragraph**, separated by a blank line. The white space is doing real work: it is what makes the post readable in a feed on a phone.
 - **`👉` for the change list, and nowhere else.** This is a deliberate exception to the no-emoji rule the blog follows. No other emoji appears in the post, and never one inside a sentence.
