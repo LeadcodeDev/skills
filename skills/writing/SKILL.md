@@ -169,6 +169,6 @@ That single clause does everything a disclosure box does, and it costs the reade
 
 Read the one for the platform, at step 0, once per piece.
 
-- `references/explainer.md` — Explainer blog: source ranking, coverage, inline linking, MDX format, written French register
+- `references/explainer.md` — Explainer blog: source ranking, coverage, inline linking, written French register, file path and frontmatter, and which component to reach for
 - `references/linkedin.md` — LinkedIn: the arc, the one permitted target of criticism, form and output contract
-- `references/explainer-mdx.md` — complete MDX component syntax and code-block features. Read when writing a component you are not certain of.
+- `references/explainer-mdx.md` — how to write those components: full syntax, colon counts, per-component gotchas, code-block features. The only place syntax lives. Read when writing a component you are not certain of.

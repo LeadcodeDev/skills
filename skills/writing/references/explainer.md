@@ -101,26 +101,18 @@ author: author_id                   # optional — must exist in src/lib/authors
 
 New articles are written `status: draft` unless the user says otherwise. Publishing is theirs to decide.
 
+## Which component, and why
+
+Reaching for a component is an editorial decision; writing it correctly is a syntax question, and the syntax lives in `explainer-mdx.md` alone. Choose here, then go there for the how.
+
+- **Callout** — a caveat or a breaking change the reader must not miss at that point in the argument. Not for disclosure of thin evidence: that belongs in the sentence, in your voice.
+- **Card Group + Card** — a collection of links that are genuinely alternatives to each other. Two cards is usually a list in disguise.
+- **Steps** — something the reader performs in order, where doing step three before step two fails.
+- **Code Group** — the same thing expressed several ways, side by side.
+- **Tabs** — package manager or config variants of one instruction.
+
+Default to prose. Every component is a decision the reader has to parse before they can read, and an article built from containers reads as documentation.
+
 **All MDX components are auto-imported** — never write an import statement.
 
-The components an article actually uses:
-
-| Component | Syntax | Use for |
-|-----------|--------|---------|
-| Callout | `:::callout{variant="info"}` | Caveats, breaking changes |
-| Card Group | `::::card-group{cols=2}` | Link collections, further reading |
-| Card | `:::card{label="..." icon="lucide:..."}` | One card inside a group |
-| Steps | `::::step-group` + `:::step{title="..."}` | Anything sequential |
-| Code Group | `:::codegroup` + labeled blocks | Alternatives side by side |
-| Tabs | `<Tabs items={[...]} client:load>` | Package manager or config variants |
-
-Nesting uses **increasing colon counts** — the outer container always carries more colons than what it holds. Getting this wrong is the single most common MDX failure:
-
-```
-::::card-group    (4) — container
-  :::card         (3) — leaf
-  :::
-::::
-```
-
-Full component syntax, code-block features (highlighting, diffs, labels), and the per-component gotchas: read `explainer-mdx.md` before writing a component you are not certain of.
+Nesting uses increasing colon counts, and getting it wrong is the single most common MDX failure. The rule, the counts per component, and the same-level collision gotcha are in `explainer-mdx.md`; read it before writing any component you are not certain of, along with the code-block features (highlighting, diffs, file labels).
