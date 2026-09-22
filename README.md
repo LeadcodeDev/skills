@@ -11,7 +11,7 @@ Three skills, one plugin. They are opinionated on purpose: each one encodes deci
 /plugin install baptistep@baptistep-skills
 ```
 
-Then the skills are available as `/baptistep:dev-methodology`, `/baptistep:audit` and `/baptistep:writing-article`. Most of the time you will not type them — each declares the contexts it should fire in, and Claude consults them on its own.
+Then the skills are available as `/baptistep:dev-methodology`, `/baptistep:audit` and `/baptistep:writing`. Most of the time you will not type them — each declares the contexts it should fire in, and Claude consults them on its own.
 
 To work on the skills themselves, point the marketplace at a local clone instead:
 
@@ -59,21 +59,23 @@ A read-only assessment of a target — a whole codebase, a module, a branch diff
 
 Seven phases from scoping to architecture depth, with per-domain references for backend, frontend, architecture, code quality and review.
 
-### `writing-article` — publishing what you found
+### `writing` — publishing what you found
 
-Long-form articles a stranger can trust, written for an [Explainer](https://github.com/LeadcodeDev/explainer) blog. The discipline is factual rather than stylistic, because an article is read by people who cannot check your work.
+Text a stranger can trust, for two platforms: long-form articles on an [Explainer](https://github.com/LeadcodeDev/explainer) blog, and LinkedIn posts. The discipline is factual rather than stylistic, because what you publish is read by people who cannot check your work.
 
 - **Fact, inference and opinion are distinguishable.** An opinion written in the grammar of a fact borrows the authority of evidence while carrying none.
 - **No invented specifics.** Numbers, dates, versions, quotes. Quotation marks are a promise of verbatim, and attribution is a claim to be verified by opening the source before writing "according to".
 - **Your own work is the spine.** External sources support what your experience cannot reach; a number earns its place only if removing it changes the argument.
 - **Rigour is infrastructure, not display.** All of the verification, almost none of the apparatus — disclosure belongs in the sentence that makes the claim, never in a methodology box or a closing confession.
-- **Coverage without a template.** Prerequisites, a serious counter-argument, the limits, what remains open, a next step — things to cover, not headings to write.
+- **The platform is settled first, not last.** It decides what counts as evidence, how much research the piece needs, and what register the prose is in. Deciding it at formatting time means discovering you wrote the wrong shape.
+
+On the blog: source ranking, coverage without a template, inline links on the claim they support, MDX. On LinkedIn: a seven-beat arc built on an external triggering event, and one rule that does most of the work — the only permitted target of criticism is yourself. Raw notes are full of verdicts about other people's tools, and relaying them faithfully feels like accuracy; it is how you publish a private judgement to an audience that includes its subject.
 
 For Explainer documentation pages rather than articles, this defers to a separate docs skill.
 
 ## How they fit together
 
-`dev-methodology` governs how any of the work happens, including the work the other two do. `audit` tells you what you are dealing with before you change it, and its findings become issues under the methodology's Git rules. `writing-article` turns what you learned into something publishable, and treats your own commits and measurements as the primary source they are.
+`dev-methodology` governs how any of the work happens, including the work the other two do. `audit` tells you what you are dealing with before you change it, and its findings become issues under the methodology's Git rules. `writing` turns what you learned into something publishable, on the blog or on LinkedIn, and treats your own commits and measurements as the primary source they are.
 
 They share one bias: prefer the artifact that cannot lie. Types over comments, tests over intentions, a compiler-enforced boundary over a rule written in Markdown, a reproduced measurement over a quoted one.
 
