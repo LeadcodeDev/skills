@@ -28,7 +28,15 @@ Five carry the post on their own: 2, 3, 5, 6, 7. **Beats 1 and 4 are conditional
 
    With nothing genuine to admit, drop the beat and open on the finding instead. An admission you had to reach for reads as false modesty, and it costs more than a plain opening would have.
 2. **Le constat** — what was genuinely wrong, stated flatly, followed immediately by the circumstance that makes it fair rather than damning. The excuse is not softening, it is accuracy: most bad states have ordinary causes.
+
+   **The circumstance is a reason, not a second description.** *"La première version se contentait d'émettre un payload, sans filet"* restates the flaw in kinder words and leaves the first version looking careless. *"La première version était minimaliste, visait à compléter un manque en se contentant d'émettre un payload, sans filet"* says what it was **for**, and the same flaw stops reading as negligence. Give the intent, the scope it was built to cover, or the constraint you were under at the time. If the sentence could be deleted without losing a fact, it was not a circumstance.
 3. **La conséquence** — one concrete thing that suffered, named specifically. A module nobody found, a velocity you lost, a contributor who gave up. One. A list of consequences reads as a complaint.
+
+   **Join the damage to its cause in one breath.** Left as two paragraphs, the consequence states a fact and the event that produced it arrives afterwards as an orphan, so the reader assembles the causality alone. A colon does the work:
+
+   > Je m'en suis rendu compte en regardant les données : mon service métier était éteint pile au moment où FerrisKey avait envoyé l'événement de mise à jour.
+
+   And cut the negative restatement that habit adds on the end. *"Je m'en suis rendu compte en regardant les données, pas grâce à une alerte"* pays a clause to say what the first half already implies.
 4. **Le déclic** *(conditional)* — an *external event* that forced the issue. An issue opened by a stranger, a question in a review, a migration that would not run, a CI job that went red: **the shape is what qualifies, not the list**. Anything that reached you from outside and made the problem impossible to keep postponing belongs here. Never an epiphany, never "j'ai réalisé que" — an epiphany is unverifiable and reads as narrative furniture, while an event is a fact, and that is what makes the post a story rather than an announcement.
 
    **Vague temporal markers do the same damage as an epiphany.** "Un jour", "récemment", "il y a quelque temps" demote a dated fact to an anecdote, and they are exactly where an invented event hides, because they excuse the writer from ever saying when. Lead with the event instead: *"Mon backend métier était éteint quand FerrisKey a envoyé la mise à jour d'une identité, un changement de prénom et de nom"* carries the same facts as the version opening on "Un jour", and the reader believes it. Give the date when it decides something, say nothing when it does not, and never gesture at time in between.
@@ -46,9 +54,15 @@ Five carry the post on their own: 2, 3, 5, 6, 7. **Beats 1 and 4 are conditional
    >
    > 👉 Retry automatique quand l'envoi échoue
 
+   **Name the work, not the release.** *"La v2 change trois choses d'un coup :"* makes a version number the subject and turns the post into a product note. *"L'un des derniers chantiers que j'ai menés change trois axes d'un coup :"* keeps you as the agent, which is the whole basis of the post's credibility. No "la v2", no "la nouvelle version", no release label carrying the sentence.
+
    Then one line per change, no sub-bullets, five items at the outside.
 6. **La leçon** — one sentence, standing alone. If it needs two, it is not yet a lesson.
 7. **L'invitation** — an open question to people who have done the same thing. Genuinely open: something you do not already know the answer to.
+
+   **Ask about their situation, not about the topic.** *"Vous gérez ça comment, vous, la synchro ?"* gestures at the subject and doubles the pronoun for a familiarity nobody asked for. *"Comment gérez-vous la synchro de votre service IT lorsque le backend en face n'est pas toujours là pour la recevoir ?"* puts the reader's own system in the question, which is what makes answering feel possible.
+
+   This is the one beat where the register tightens. The rest of the post is spoken French; the closing question is addressed to professionals about their work, so drop the oral tics — the doubled `vous`, the trailing `comment`, the inverted clause — and ask it straight.
 
 Beat 4 is the one worth fighting for. It is what separates a story from a changelog with feelings, so when an external event does exist in the raw material, find it and use it rather than settling for the five load-bearing beats. Making it conditional is there to stop it being invented, not to make it optional in spirit.
 
@@ -83,6 +97,7 @@ Two consequences:
 
 - **An order of magnitude beats a false precision.** "l'image est passée de 700 Mo à une trentaine" is honest and memorable. "réduction de 95,7 %" invites a question you cannot answer.
 - **Say when you did not measure.** "Je n'ai pas fait de mesure propre, donc je ne vais pas sortir un pourcentage" is a strong sentence, not a weak one. It tells the reader which of your other numbers to trust.
+- **Absolutes are claims, and usually false ones.** "complète", "totale", "tous", "jamais", "100 %" cost nothing to write and are almost never true of a first pass. Write the lesser claim, which is both accurate and more informative: *"Traçabilité améliorée de chaque webhook (succès comme échecs)"* beats *"Traçabilité complète de chaque webhook"*, because the parenthesis says what is actually covered while the superlative says only that you are pleased. A reader who has shipped the same feature knows "complète" is not true and stops trusting the rest.
 
 ---
 
@@ -103,6 +118,8 @@ The blog's five coverage items do not survive a 2000-character post. Two of them
 - **Zero dashes.** No `—`, no `–`, no `-` used as punctuation. Comma, colon, period, or a line break. This is absolute, quoted material included, because a post quotes nothing.
 - **One to three lines per paragraph**, separated by a blank line. The white space is doing real work: it is what makes the post readable in a feed on a phone.
 - **`👉` for the change list, and nowhere else.** This is a deliberate exception to the no-emoji rule the blog follows. No other emoji appears in the post, and never one inside a sentence.
+- **The `👉` items are contiguous.** No blank line between them, whatever the one-to-three-line rule says above: that rule governs paragraphs, and the list is one block. Spacing the items out makes three changes look like three announcements and doubles the scroll the post costs.
+- **Do not spend in the opening a specific a later beat needs.** *"c'est chez moi, sur mon propre backend métier, que je m'en suis rendu compte"* names the failing system in the second line, so the paragraph that reveals it was switched off lands on something the reader already knows. Keep the opening general, *"dans le cadre de l'un de mes projets"*, and let the specific arrive once, where it does work. "Chez moi" also frames professional work as tinkering, which is rarely what you mean.
 - **No markdown.** LinkedIn renders none of it. No `**bold**`, no `#` headings, no `[text](url)`. A URL is pasted bare or left out.
 - **Quotation marks around jargon** you are borrowing rather than endorsing: `un style "brutaliste"`, `les "realm settings"`.
 - **`qu'on` is correct here.** The blog's `que l'on` rule is a written-prose rule; applying it to a post makes the voice stiff. Spoken register is the point.
