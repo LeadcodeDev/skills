@@ -69,7 +69,9 @@ Text a stranger can trust, for two platforms: long-form articles on an [Explaine
 - **Rigour is infrastructure, not display.** All of the verification, almost none of the apparatus — disclosure belongs in the sentence that makes the claim, never in a methodology box or a closing confession.
 - **The platform is settled first, not last.** It decides what counts as evidence, how much research the piece needs, and what register the prose is in. Deciding it at formatting time means discovering you wrote the wrong shape.
 
-On the blog: source ranking, coverage without a template, inline links on the claim they support, MDX. On LinkedIn: a seven-beat arc built on an external triggering event, and one rule that does most of the work — the only permitted target of criticism is yourself. Raw notes are full of verdicts about other people's tools, and relaying them faithfully feels like accuracy; it is how you publish a private judgement to an audience that includes its subject.
+On the blog: source ranking, coverage without a template, inline links on the claim they support, MDX. On LinkedIn: three frameworks to pick from, hard limits on the hook and the length, no link and no hashtag in the body, and one rule that does most of the work — the only permitted target of criticism is yourself. Raw notes are full of verdicts about other people's tools, and relaying them faithfully feels like accuracy; it is how you publish a private judgement to an audience that includes its subject.
+
+Two things are asked before a post is drafted rather than guessed: which framework, and whether lists carry emoji bullets. The second is a preference that changes per post, and the skill that decides it for you is the one that produces posts in its own voice instead of yours.
 
 For Explainer documentation pages rather than articles, this defers to a separate docs skill.
 
