@@ -28,7 +28,7 @@ Avoid `let t = tokio::time::Instant::now();`. Prefer `use tokio::time::Instant;`
 ## Type-driven invariants
 
 - Make invalid states unrepresentable: newtypes for identifiers and secrets, exhaustive enums for state machines, `NonZero*`/`Option` instead of sentinel values.
-- Never ignore a `Result`. `.unwrap()`/`.expect()` are acceptable only in tests, examples, and provably-infallible cases — with the inline claim "Writing code" asks for: what makes this call infallible, not that it is. That claim, a `SAFETY:` block, and the reason on `#[allow(…)]`, `#[expect(…)]` or `#[rustfmt::skip]` are the only comments a function body carries.
+- Never ignore a `Result`. `.unwrap()`/`.expect()` are acceptable only in tests, examples, and provably-infallible cases, and they carry no inline justification: "Writing code" forbids the comment, doc comments and `SAFETY:` blocks included, unless the user asked for it. A call whose infallibility the surrounding code cannot show is a call to restructure, not one to annotate — and where `clippy::undocumented_unsafe_blocks` or `missing_docs` is enabled, the conflict is named and handed back rather than resolved by writing the comment.
 - Use `#[must_use]` on types and functions whose result being dropped is a bug.
 - Sensitive material (keys, tokens, passwords) gets deterministic cleanup: `zeroize` on drop, no `Debug`/`Display` derivation, no accidental logging.
 
