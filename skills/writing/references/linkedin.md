@@ -39,7 +39,7 @@ Three hard consequences:
 It is all a phone shows before "voir plus", so it is the whole post's gate:
 
 - **Under 140 characters.** The truncation is physical, so this limit is hard.
-- **Under 15 words.** A scannability heuristic rather than a mechanism: of the three openings listed under beat 1, two clear it and one sits at 17 words. Treat it as a target that the character limit outranks.
+- **At most 14 words.** Written as a count rather than as "under 15" on purpose: an inequality gets fumbled at its own boundary, and a first line of exactly 15 words has been shipped that way. It is a scannability heuristic rather than a mechanism, so the character limit outranks it, but it is checked like a mechanism. Of the three openings listed under beat 1, two clear it and one sits at 17 words.
 - **Never a question.** It performs badly, and it reads as a prompt rather than as a person.
 
 **No example belongs in this section.** Beat 1 already carries three, chosen to be structurally unalike. A fourth quoted here, beside a pair of numbers, is exactly the concrete example that beats a caveat in prose.
@@ -210,7 +210,13 @@ The post is the whole output. It ends on the invitation, and **nothing follows i
 - no "voici le post", no closing offer to adjust it
 - no signature, no call to action beyond the invitation itself
 
-Two things are countable, so count them before showing the post rather than estimating: the first line is under 140 characters, and the whole post is between 1300 and 2500. Both are cheap now and invisible once published.
+Three things are countable, so count all three before showing the post rather than estimating:
+
+1. the first line is **at most 139 characters**
+2. the first line is **at most 14 words**
+3. the whole post is **between 1300 and 2500 characters**
+
+State the three figures above the post so they can be checked. Counting the second one and shipping it anyway is the observed failure, not forgetting to count: report the number and compare it, or the count is decoration.
 
 Anything you need to tell the user about the post — a number they should check, a claim you could not verify, a sentence that speaks for them and deserves a re-read — goes in the conversation **before** the post, not appended to it. What sits after the last line is what gets pasted by accident.
 
