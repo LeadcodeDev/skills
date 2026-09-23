@@ -126,7 +126,7 @@ Pattern 20, *knowledge-cutoff disclaimers*, collides. It targets phrasing like "
 
 If a sentence names what *you* checked, it is evidence. If it hedges about what *the model* knows, it is noise.
 
-Pattern 17, *emoji*, holds everywhere except one deliberate exception named in `references/linkedin.md`. Do not let the humanizer strip it there.
+Pattern 17, *emoji*, holds on the blog without exception. On LinkedIn it depends on an answer the user gives before drafting: if they accepted emoji bullets, the humanizer must not strip them. Check which answer was given before invoking it.
 
 **Nothing factual may change in this pass.** Quotes, figures, dates, version numbers, benchmark results and link targets are off limits — the humanizer rewrites voice, not evidence. Say so when invoking it.
 

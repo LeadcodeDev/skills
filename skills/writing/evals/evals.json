@@ -103,16 +103,13 @@
       "name": "keycloak-migration-linkedin",
       "platform": "linkedin",
       "prompt": "un post linkedin sur ça : bon on a fini par virer Keycloak de notre stack sur FerrisKey. ça faisait des mois que ça nous saoulait, la conso mémoire de la JVM était délirante sur nos petits nœuds, et la config XML/JSON pour les realms c'était l'enfer à versionner. on a réécrit la partie auth en Rust. résultat l'image docker est passée de qqch comme 700Mo à un truc genre 30Mo, et le démarrage c'est quasi instantané maintenant au lieu d'attendre. par contre on a perdu plein de features, le SSO SAML on l'a pas encore, et honnêtement pour une boîte qui a déjà une équipe qui connaît Keycloak je suis pas sûr que ça vaille le coup de migrer.",
-      "expected_output": "Plain-text French LinkedIn post following the seven-beat arc, in which every judgement aimed at Keycloak or the JVM in the notes has been converted into a constraint the author had.",
+      "expected_output": "Plain-text French LinkedIn post built with the HookStoryCta framework, in which every judgement aimed at Keycloak or the JVM in the notes has been converted into a constraint the author had.",
       "files": [],
       "assertions": [
         "The post is shown in the conversation; no file is written",
         "Plain text only: no markdown bold, no headings, no markdown link syntax",
-        "No hashtag appears anywhere",
         "Nothing follows the closing invitation: no commentary on choices, no meta-text, no offer to adjust",
         "No dash of any kind is used as punctuation, em dash and hyphen included",
-        "The change list uses the emoji bullet, and no other emoji appears in the post",
-        "No emoji appears inside a sentence",
         "Paragraphs are one to three lines, separated by blank lines",
         "Keycloak, the JVM and Java are never described as bad, heavy, painful or exasperating",
         "The memory and versioning grievances are restated as the author's own constraints, not as defects of the tool",
@@ -125,7 +122,17 @@
         "The lost features and the missing SAML SSO are stated, not omitted",
         "The caveat that migrating may not be worth it for a team that knows Keycloak survives into the post",
         "No prerequisites section, no developed counter-argument section, no open-questions section",
-        "Spoken register: qu'on is acceptable here and the prose does not read as written essay French"
+        "Spoken register: qu'on is acceptable here and the prose does not read as written essay French",
+        "No hashtag appears anywhere",
+        "The framework and the emoji-bullet preference are asked together in one message, before drafting",
+        "The hook is under 140 characters and under 15 words",
+        "The hook is not a question",
+        "The whole post is between 1300 and 2500 characters",
+        "No URL or link appears anywhere in the post",
+        "No engagement bait: no tag someone, no like si, no commente OUI",
+        "Emoji usage matches the preference given: none at all if bullets were declined, otherwise the bullet emoji on list items only",
+        "The closing CTA asks something only someone who did the same thing could answer, not a generic qu'en pensez-vous",
+        "No opener announcing its own significance (dans un monde ou, a l'heure ou, soyons honnetes)"
       ]
     },
     {
@@ -138,10 +145,8 @@
       "assertions": [
         "The post is shown in the conversation; no file is written",
         "Plain text only: no markdown bold, no headings, no markdown link syntax",
-        "No hashtag appears anywhere",
         "Nothing follows the closing invitation: no commentary on choices, no meta-text, no offer to adjust",
         "No dash of any kind is used as punctuation, em dash and hyphen included",
-        "The change list uses the emoji bullet, and no other emoji appears in the post",
         "Paragraphs are one to three lines, separated by blank lines",
         "No duration, percentage or speedup figure appears anywhere, because the notes contain none",
         "The absence of a proper measurement is stated plainly in the author's voice, not hedged into vagueness",
@@ -152,7 +157,17 @@
         "The author criticises his own past work or decisions somewhere in the post",
         "The deleted tests are framed as the author's own earlier mistake, not as someone else's",
         "No prerequisites section, no developed counter-argument section, no open-questions section",
-        "Spoken register: qu'on is acceptable here and the prose does not read as written essay French"
+        "Spoken register: qu'on is acceptable here and the prose does not read as written essay French",
+        "No hashtag appears anywhere",
+        "The framework and the emoji-bullet preference are asked together in one message, before drafting",
+        "The hook is under 140 characters and under 15 words",
+        "The hook is not a question",
+        "The whole post is between 1300 and 2500 characters",
+        "No URL or link appears anywhere in the post",
+        "No engagement bait: no tag someone, no like si, no commente OUI",
+        "Emoji usage matches the preference given: none at all if bullets were declined, otherwise the bullet emoji on list items only",
+        "The closing CTA asks something only someone who did the same thing could answer, not a generic qu'en pensez-vous",
+        "No opener announcing its own significance (dans un monde ou, a l'heure ou, soyons honnetes)"
       ]
     },
     {
@@ -169,6 +184,23 @@
         "No file is written before the answer",
         "The question is asked once and does not come bundled with a full draft of both variants",
         "The question distinguishes the Explainer blog from LinkedIn in terms the user can answer without reading the skill"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "linkedin-setup-questions",
+      "platform": "linkedin",
+      "prompt": "fais moi un post linkedin sur la refonte du systeme de webhooks de FerrisKey : retry avec backoff exponentiel, signature HMAC, et une UI pour rejouer les livraisons echouees. le declic c'est un utilisateur qui a perdu des livraisons pendant une coupure et qui a ouvert une issue.",
+      "expected_output": "The framework and the emoji-bullet preference are asked in a single message before any drafting, with a recommended framework named and justified.",
+      "files": [],
+      "assertions": [
+        "Both questions are asked in one message, not in a sequence of two",
+        "The questions come before any draft or partial post is produced",
+        "A specific framework is recommended and the recommendation is justified by the material",
+        "HookStoryCta is the one recommended, the material being a retour d'experience with a triggering event",
+        "The emoji-bullet question is posed as a preference, not as a rule the skill already decided",
+        "No file is written",
+        "The platform is not re-asked, since the prompt already says linkedin"
       ]
     }
   ]
