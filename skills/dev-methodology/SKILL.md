@@ -15,7 +15,7 @@ Behavioral rules for how to conduct application development work. These are proc
 
 **How you write to the user.** Every message is written for a reader at the end of a long day: simple words, short sentences, short paragraphs, one idea per sentence, active voice. Address them as `tu`. A term they may not have is explained in the same breath rather than left to be looked up.
 
-This covers messages, not artifacts. A commit message, an issue, or a PR description is written for someone who was not in the conversation and has to reconstruct it; there, length that carries what the diff cannot is the point, not a failure of register (see "Git essentials").
+Publishing to the repository changes the reader, not the register. A commit message, an issue, a PR description or a review reply is read by someone who was not in the conversation, so it carries context this chat can leave implicit — and that is the only thing it gets. Not longer sentences, not heavier formatting, not a more formal voice. Length is bought by information the reader cannot get elsewhere and by nothing else. "Git essentials" says what that buys and what it forbids.
 
 **Say it once, then stop.** Length is not thoroughness. Do not restate the request back, do not re-derive what the conversation already settled, do not narrate the options you considered and dropped, and do not close by summarising what the reader has just finished reading. A sentence that could be deleted without the reader losing a fact or an instruction is a sentence to delete. The rule is about volume, where the paragraph above is about register, and it applies to every output rather than to chat alone — padding is easiest to add to a plan, a spec or a review remark, because there it looks like rigour.
 
@@ -358,7 +358,36 @@ These rules cover routine Git operations inline — do not reload a reference fi
   - **Labels** — only labels that already exist in the repository. List them first and pick from that set; never create one as a side effect of opening a PR. If none fits, say so and propose the new label separately.
 - **Every PR references its issue.** `Closes #N` when the PR fully resolves it, `Refs #N` when it advances it without closing. If no issue exists, state that in the body rather than leaving the link silently absent — an unlinked PR should read as a decision, not an oversight.
 - **The PR description is part of the diff.** It is written when the PR opens and rots silently with every commit pushed afterwards. Before pushing to an open PR, re-read its description: if the commit invalidates anything the description claims — a rule removed, an approach reversed, a decision taken the other way — rewrite it in the same turn. A description that merely lags behind is incomplete; one that still promises what the branch has since removed actively misleads, and it misleads the single person whose job is to catch exactly that.
-- **Record in the description what the session knows and the diff does not.** Why an approach was tried and abandoned, what an evaluation measured, which alternative was rejected and on what evidence. The branch keeps the code; the conversation that justified it disappears. A reviewer six months out has only this text.
+- **Record in the description what the session knows and the diff does not.** Why an approach was tried and abandoned, what an evaluation measured, which alternative was rejected and on what evidence. The branch keeps the code; the conversation that justified it disappears, and a reviewer six months out has only this text.
+- **The diff is the ceiling on that record.** The description exists to get *these* changes reviewed. What the session learned past them — an audit that turned up eight other defects, work deliberately deferred to a later layer, a defect in a neighbouring module — goes in an issue, and the description carries the link. A body that outgrows what the reviewer needs stops being read, which costs more than the paragraphs it saved.
+
+### How it reads
+
+Everything published to the repository is signed with a human's name and read as that person's work. On a security project that signature is part of what the project is trusted on: prose that reads as machine-written spends credibility the code earned. The register above applies here in full. These are the tells that survive it anyway.
+
+- **Bold is not a heading.** A comment with `**The reachable path.**` and `**Why this was not done here.**` standing in for section titles is a document impersonating a remark. Write the paragraphs.
+- **A count is not a section header.** "Two departures from the suggestion" or "three things this leaves open", set in bold above a bullet list, is scaffolding rather than writing. Counting inside a sentence is ordinary and people do it; the tell is the announcement standing alone over the enumeration it introduces.
+- **Never narrate the work.** "Verified the claim before acting", "measured against the previous commit", "worth recording why this got past me". The reader wants the finding, not the route to it. Do the rigour, show the result.
+- **The session's circumstances are not the reader's business.** A browser extension that did not answer, a sandbox that blocked a probe, CI that does not fire on a stacked PR, how the base branch moved underneath. The reader needs the consequence — "not verified in a browser" — and never the story behind it. A paragraph explaining your working conditions to a reviewer is the plainest signature a machine leaves.
+- **Report a result, not a transcript.** `1278 passed, 0 failed` is the evidence. Ten pasted HTTP calls and five pasted commands ask the reviewer to redo the reading you already did. Paste output only where the output itself is the finding.
+- **One em dash per paragraph at most.** Density here is the most recognizable tell in the list.
+- **No closing summary.** The last paragraph is not a recap of the ones above it.
+- **Never grade a finding, never thank a reviewer.** Not a bot, not a person. "Great catch", "sharper than minor", "excellent point" — a bot cannot be flattered, and a contributor did not ask to be scored.
+
+**Calibrate on the repository, not on this list.** Read the three most recent comments a human maintainer wrote and match their length and their register. That baseline already exists, it is what readers expect from this project, and it beats any rule written here.
+
+Past a few paragraphs — an issue body, the description of a substantial PR — run the `humanizer` skill on the draft before posting, and say when invoking it that the facts are frozen: SHAs, figures, file paths, version numbers and link targets do not change in that pass. An honest record of what you could not verify is evidence, not a tell, and it survives too.
+
+### Answering a review
+
+A review thread exists to be closed, not to be answered. Someone — CodeRabbit or a person — opened it because something looked wrong; the fix closes it, and the reply carries only what the fix cannot.
+
+- **The correction is the reply.** Push it. `Fixed in <sha>.` is a complete comment, and on a finding you simply applied it is all a reader needs.
+- **One reply per thread, answering what was asked.** Not a bullet per point raised, not a second comment once the first is posted.
+- **A disagreement is two sentences: what the finding gets wrong, and what you did instead.** Defending a choice at length reads as defending a weak one, and the reviewer can reopen the thread if two sentences were not enough.
+- **What the reply turns up beyond the thread leaves the thread.** A finding that proves to be a class rather than an instance becomes an issue, or an edit to the PR description, and the reply carries the link. Seven other handlers with the same defect are worth more in an issue than in a paragraph that gets resolved tomorrow.
+- **Name in one sentence what you could not verify.** "Not exercised at runtime — this package has no hook test harness." That sentence is the one line of a reply never worth cutting.
+- **A person gets an answer, a bot gets an outcome.** Someone who reported something is owed the substance, and a question back if you have one. A bot is owed the status of its finding and nothing else.
 
 ## Review and collaboration
 
