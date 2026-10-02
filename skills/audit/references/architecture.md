@@ -35,7 +35,7 @@ Rejected framings: depth as a ratio of implementation-lines to interface-lines (
 
 If the repo carries a domain glossary (`CONTEXT.md` or equivalent) or ADRs under `docs/adr/`, read the ones covering the area first. The domain language gives names to good seams; ADRs record decisions this pass should not re-litigate. Neither is required — proceed without them if absent.
 
-Then walk the codebase — dispatch `Explore` sub-agents for breadth. Don't follow rigid heuristics; explore organically and note where you experience friction:
+Then walk the codebase — dispatch `Explore` sub-agents on `haiku` for breadth, briefed for locations and excerpts rather than verdicts. Don't follow rigid heuristics; explore organically and note where you experience friction:
 
 - Where does understanding one concept require bouncing between many small modules?
 - Where are modules **shallow** — interface nearly as complex as the implementation?
@@ -79,7 +79,7 @@ When exploring alternative interfaces for a chosen candidate, use a parallel sub
 
 **Frame the problem space** first, for the user: the constraints any new interface must satisfy, the dependencies it relies on and their category, and a rough illustrative sketch to make the constraints concrete (not a proposal). Show it, then proceed immediately — the user reads while the sub-agents work.
 
-**Spawn 3+ sub-agents in parallel**, each producing a *radically different* interface. Brief each one separately with file paths, coupling details, dependency category, and what sits behind the seam — the brief is independent of the user-facing framing. Give each a different design constraint:
+**Spawn 3+ sub-agents in parallel on `fable`**, each producing a *radically different* interface. Brief each one separately with file paths, coupling details, dependency category, and what sits behind the seam — the brief is independent of the user-facing framing. Give each a different design constraint:
 
 - Minimize the interface — 1–3 entry points max, maximum leverage per entry point.
 - Maximize flexibility — support many use cases and extension.

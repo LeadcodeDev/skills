@@ -29,6 +29,22 @@ Report prose is written in French, like every other message to the user; `file:l
 
 Announce the mode in one line and proceed. When the request spans two modes, run the wider one and say so.
 
+## Dispatch
+
+Exploration is delegated, judgement is not. Route by what the output is, not by how large the phase feels.
+
+| Output | Model | Where |
+|---|---|---|
+| Facts — paths, `file:line`, short excerpts | `haiku` | Phase 1 mapping, the dependency inventory in Phase 2, locating every use of a pattern for Phases 3 and 4 |
+| A checklist applied to code it was pointed at | `sonnet` | Phase 3 per category, Phase 4, Phase 6, and re-verifying a written finding at its `file:line` |
+| A verdict, a severity, a scenario nobody listed | session model (`opus` or above) | Phase 0, the architecture map, Phase 5, the report |
+| A design rather than a verdict | `fable` | Phase 7 deepening candidates and the parallel interface proposals in `references/architecture.md` |
+
+- **An explorer returns facts, not findings.** Brief it for paths, line numbers and excerpts. A finding it hands back has to be re-verified before it can be reported, so the cheap read gets paid for twice and conviction over volume is the first casualty.
+- **Context is the explorer's constraint.** `haiku` carries 200K against 1M on the others, so it reports locations and excerpts — never whole files pulled back into the transcript.
+- **`fable` is dispatched, never resident.** It is the most expensive model in the table by a wide margin. A handful of calls where the answer is an interface, and no phase run end to end on it.
+- **Phase 0 and the report stay in the session.** Scope, severity, and the finding-versus-convention call are the part the user is actually asking for.
+
 ## Phase 0 — Scoping
 
 Before reading any code, establish with the user:
