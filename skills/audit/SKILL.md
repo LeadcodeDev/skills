@@ -17,7 +17,7 @@ Auditing a target end to end — security, correctness, coherence, code quality,
 - **The repo outranks this skill.** A finding that contradicts the target's `CLAUDE.md` / `AGENTS.md` or an established, deliberate repo pattern is not a finding — defer to the repo, or raise it as a question about the convention itself.
 - **Scale to the target.** A 2,000-line service gets a full pass; a 500k-line monorepo gets a scoped audit — agree on scope with the user first (Phase 0).
 
-Report prose is written in French, like every other message to the user; `file:line` citations, identifiers, and quoted code stay verbatim. Findings promoted to issues or PRs are written in English (see the `dev-methodology` skill).
+Report prose is written in French, like every other message to the user; `file:line` citations, identifiers, and quoted code stay verbatim. Findings promoted to issues or PRs are written in English.
 
 ## Pick the mode before starting
 
@@ -113,7 +113,7 @@ Deliver a single structured report:
 4. **Reviewed-clean list:** categories examined without findings, so coverage is auditable.
 5. **Prioritized remediation plan:** ordered by risk-to-effort, distinguishing quick wins from structural work.
 
-Do not propose fixes inline in the code during the audit; the report comes first, remediation is a separate step the user decides on (per the `dev-methodology` skill: announce, then act).
+Do not propose fixes inline in the code during the audit; the report comes first, remediation is a separate step the user decides on — announce it, then act.
 
 ## Reference files
 
