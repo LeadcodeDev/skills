@@ -36,6 +36,7 @@ skills/rustmotion/
 │   │   ├── decision-maker.md
 │   │   ├── general-public.md
 │   │   └── tech.md
+│   ├── persona-format.md
 │   ├── review-prompt.md
 │   ├── rebuttal-prompt.md
 │   └── synthesis-format.md
@@ -54,7 +55,7 @@ skills/rustmotion/
    (`cargo build --release` in the clone, or `cargo install --git
    https://github.com/LeadcodeDev/rustmotion`).
 3. **Authoring knowledge.** The orchestrator loads the official guide
-   `.claude/skills/rustmotion/SKILL.md` and the `rules/` it needs, from the first
+   `crates/rustmotion/skills/SKILL.md` and the `rules/` it needs (`.claude/skills/rustmotion` in the rustmotion repo is a symlink to it, which raw GitHub does not follow), from the first
    source found:
    - a local rustmotion clone (current directory or its parents, then
      `~/Development/rustmotion`);
@@ -97,9 +98,11 @@ Each round is self-contained so the user can reread any of them.
    `rustmotion validate -f scenario.json` (schema + geometry) until both passes are
    green. Missing icons: `rustmotion icons check`, then propose `icons prefetch`;
    never a silent network fetch.
-4. **Contact sheet.** `rustmotion sheet -f scenario.json --every <step> -o
-   sheet.png`, with `step = duration / 16` rounded to 0.1 s (a 4×4 grid at the
-   default `--columns 4`).
+4. **Contact sheet.** `rustmotion sheet -f scenario.json --at <t1,...,t16>
+   --cell-width 480 -o sheet.png`, with `t_i = (i + 0.5) × duration / 16`: the
+   middle of 16 equal slices, a 4×4 grid at the default `--columns 4`. Measured
+   on `examples/rustmotion-promo.json`: `--every duration/16` gives 17 cells with
+   an empty frame 0, and 320 px cells make code unreadable.
 5. **Debate.**
    - Pass 1: one sub-agent per persona, in parallel, via the Agent tool. Input:
      its persona file, `brief.md`, `storyboard.md`, `sheet.png`. Not the JSON: a
@@ -118,7 +121,7 @@ Each round is self-contained so the user can reread any of them.
 
 ## Persona format
 
-Each `references/personas/<name>.md`:
+Each `references/personas/<name>.md` follows `references/persona-format.md`:
 
 - who the persona is, in two or three sentences;
 - what they look for in the first ten seconds;
