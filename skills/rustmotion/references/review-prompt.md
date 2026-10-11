@@ -20,15 +20,15 @@ score: 7
 criteria:
   - name: <criterion name as written in your persona file>
     score: 6
-    why: <one sentence>
+    why: "<one sentence>"
 keeps:
   - at: "2.4s"
-    what: <what works, one sentence>
+    what: "<what works, one sentence>"
 changes:
   - at: "4.5s"
-    issue: <what is wrong, as you experience it>
-    fix: <what you would need instead>
+    issue: "<what is wrong, as you experience it>"
+    fix: "<what you would need instead>"
     priority: must
 ```
 
-Rules for the format: `score` values are integers from 0 to 10; `at` is a timestamp printed on the sheet, quoted, with its `s`; `priority` is `must` or `should`; every criterion of your persona appears exactly once.
+Rules for the format: every free-text value is a double-quoted string, with any inner `"` escaped as `\"`, because an unquoted text containing `: ` breaks the YAML; `score` values are integers from 0 to 10; `at` is a timestamp printed on the sheet, quoted, with its `s`; `priority` is `must` or `should`; every criterion of your persona appears exactly once.

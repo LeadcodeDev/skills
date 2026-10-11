@@ -23,7 +23,7 @@ Each contested change, both sides, then the recommendation.
 - **Recommendation:** <decision>, because the primary audience is <persona>.
 
 ## Dropped
-Personas excluded this round because their output stayed invalid, and why. Omit the section if none.
+Personas excluded this round because their output stayed invalid, and legibility changes disproved by a full-size still (with its path). Omit the section if none.
 
 ## Planned changes
 The ordered list applied in round N+1 if the user says apply: consensus items, then recommended disagreement outcomes, then cheap uncontested `should` items.

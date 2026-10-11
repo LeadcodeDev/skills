@@ -82,7 +82,15 @@ Read the sheet yourself before dispatching: a blank or broken sheet is a generat
 
 **Pass 2.** Once every pass-1 file exists, one sub-agent per persona again, in parallel, built from `references/rebuttal-prompt.md`. Each receives its own pass-1 review and all the others'. Each writes `round-N/reviews/<persona>.pass2.md`.
 
-**Format check.** Parse every file against the strict format in its prompt. An invalid one is relaunched once with the parse error quoted. Still invalid: drop that persona for this round and say so in the synthesis.
+**Format check.** Parse every file as YAML against the strict format in its prompt. Compare `at` values as numbers, not strings: the sheet prints `6.10s` and personas write `6.1s` as often as `6.10s`. An invalid file is relaunched once with the parse error quoted. Still invalid: drop that persona for this round and say so in the synthesis.
+
+**Legibility check.** The sheet shows each frame at a quarter of 1920 px, so text that is fine on screen can look unreadable on it. Before any change about text being too small, too dim or unreadable enters the synthesis, render that instant at full size and look at it yourself:
+
+```bash
+$RM still -f round-N/scenario.json --time <t> -o round-N/still-<t>.png
+```
+
+Readable at full size: drop the change and list it under **Dropped** with the still's path. Still unreadable: keep it.
 
 ## Step 6 — synthesis, then Gate 2
 

@@ -26,12 +26,12 @@ responses:
   - to: <persona id of the reviewer>
     change_at: "4.5s"
     stance: contest
-    argument: <one or two sentences>
-    alternative: <what would satisfy both, or null>
+    argument: "<one or two sentences>"
+    alternative: "<what would satisfy both>"   # unquoted null when there is none
 withdrawn:
   - at: "6.0s"
-    reason: <why you no longer want this change>
+    reason: "<why you no longer want this change>"
 revised_score: 8
 ```
 
-Rules for the format: one `responses` entry per change asked by another persona, none skipped; `stance` is `agree`, `concede` or `contest`; `alternative` is required on `contest` and may be `null` elsewhere; `withdrawn` may be an empty list; `revised_score` is an integer from 0 to 10.
+Rules for the format: every free-text value is a double-quoted string, with any inner `"` escaped as `\"`, because an unquoted text containing `: ` breaks the YAML; one `responses` entry per change asked by another persona, none skipped; `stance` is `agree`, `concede` or `contest`; `alternative` is required on `contest` and may be `null` elsewhere; `withdrawn` may be an empty list; `revised_score` is an integer from 0 to 10.

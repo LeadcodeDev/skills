@@ -169,6 +169,15 @@ responses:
 revised_score: 8
 ```
 
+## Legibility check
+
+A sheet cell is a quarter of a 1920 px frame. Measured on
+`examples/rustmotion-promo.json`: the tech persona flagged the code at 6.1 s as
+unreadable, and `rustmotion still --time 6.1` showed it plainly readable. Before a
+legibility change enters the synthesis, the orchestrator renders that instant at
+full size and drops the change if the text reads. `at` values are compared as
+numbers: the sheet prints `6.10s`, personas write `6.1s` as often.
+
 ## Synthesis format
 
 - **Consensus:** every `must` raised by one persona and not contested, or contested
