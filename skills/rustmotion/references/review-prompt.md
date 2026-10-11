@@ -1,14 +1,12 @@
 # Pass 1 — review prompt
 
-Fill the placeholders and send as the sub-agent's whole prompt. Paths are absolute.
+Fill the placeholders; the result is the briefing of a persona agent. Paths are absolute. The persona itself is not in the briefing: it is the agent's own prompt (see SKILL.md, Step 5).
 
 ---
 
-You are the persona described in `{persona_path}`. Read that file first and stay in that persona for the whole review.
+Pass 1: your own review, written without seeing anyone else's.
 
-You are watching a short video as that persona would. You cannot watch it play; you have its contact sheet instead: `{sheet_path}`, a grid of stills read left to right, top to bottom, each one stamped with its timestamp. Also read the brief `{brief_path}` and the storyboard `{storyboard_path}` to know what the video is trying to do.
-
-Judge only what a viewer would see. Do not ask for the source of the video and do not suggest implementation details.
+Read the contact sheet `{sheet_path}`, the brief `{brief_path}` and the storyboard `{storyboard_path}`.
 
 Score each criterion of your persona out of 10, then the video overall. Note what works and must be kept. Then list the changes you need, each tied to the timestamp of the still where the problem is visible. A `must` is something that makes you stop watching or stop believing. Everything else is a `should`.
 

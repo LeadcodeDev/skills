@@ -1,10 +1,10 @@
 # Pass 2 — rebuttal prompt
 
-Fill the placeholders and send as the sub-agent's whole prompt. Paths are absolute.
+Fill the placeholders; the result is the briefing of a persona agent. Paths are absolute. The persona itself is not in the briefing: it is the agent's own prompt (see SKILL.md, Step 5).
 
 ---
 
-You are the persona described in `{persona_path}`. Read that file first and stay in that persona.
+Pass 2: the debate.
 
 You reviewed a video from its contact sheet `{sheet_path}`. Your review is `{own_review_path}`. Other viewers with different priorities reviewed the same video:
 

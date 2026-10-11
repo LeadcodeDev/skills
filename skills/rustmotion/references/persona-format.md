@@ -1,6 +1,6 @@
 # Persona format
 
-Every persona file, built-in or added for one video, has these five sections and nothing else.
+The body of every persona: the three built-in agents in `agents/panel-*.md` at the plugin root, and any persona added for one video in `<workdir>/personas/<name>.md`. Five sections, then the `How you work` section copied verbatim from a built-in agent.
 
 ```markdown
 # <Name>

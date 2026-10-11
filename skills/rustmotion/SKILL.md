@@ -42,7 +42,7 @@ Collect, then write `brief.md`:
 - **format** — 1080×1920, 1920×1080 or 1080×1080;
 - **duration** — target, in seconds;
 - **key message** — one sentence;
-- **personas** — the three in `references/personas/` by default. The user may remove any. An added persona is either a file the user points to, or one they describe ("add an investor"): write it to `<workdir>/personas/<name>.md` following the persona format in `references/persona-format.md`, and show it in the brief;
+- **personas** — the three built-in agents by default: `decision-maker`, `general-public`, `tech`. The user may remove any. An added persona is either a file the user points to, or one they describe ("add an investor"): write it to `<workdir>/personas/<name>.md` following `references/persona-format.md`, and show it in the brief;
 - **max rounds** — 3 unless the user says otherwise.
 
 Ask only for what the request did not already give.
@@ -73,14 +73,20 @@ Read the sheet yourself before dispatching: a blank or broken sheet is a generat
 
 ## Step 5 — debate
 
-| Output | Model | Who |
+Each persona is a real agent. The persona, its model and its tools live in the agent file; the briefing only carries the pass, the paths and the output format.
+
+| Persona | `subagent_type` | Prompt |
 |---|---|---|
-| A review against a persona's criteria | `sonnet` | one sub-agent per persona, passes 1 and 2 |
-| The synthesis and the arbitration | session model | you |
+| built-in | `baptistep:panel-decision-maker`, `baptistep:panel-general-public`, `baptistep:panel-tech` | the filled briefing |
+| added for this video | `general-purpose`, with `model: sonnet` | `You are the persona described in <workdir>/personas/<name>.md. Read that file first, stay in that persona, and follow its How you work section.` then the filled briefing |
 
-**Pass 1.** One sub-agent per active persona, all dispatched in the same message so they run in parallel. Build each prompt from `references/review-prompt.md`. Each writes `round-N/reviews/<persona>.pass1.md`.
+An added persona cannot be a real agent: Claude Code loads agents at session start, and one written mid-session is reported as not found. To make a persona permanent, add it to `agents/` in the plugin and restart.
 
-**Pass 2.** Once every pass-1 file exists, one sub-agent per persona again, in parallel, built from `references/rebuttal-prompt.md`. Each receives its own pass-1 review and all the others'. Each writes `round-N/reviews/<persona>.pass2.md`.
+The synthesis and the arbitration stay with you, on the session model.
+
+**Pass 1.** One agent per active persona, all dispatched in the same message so they run in parallel. Build each briefing from `references/review-prompt.md`. Each writes `round-N/reviews/<persona>.pass1.md`.
+
+**Pass 2.** Once every pass-1 file exists, one agent per persona again, in parallel, briefed from `references/rebuttal-prompt.md`. Each receives its own pass-1 review and all the others'. Each writes `round-N/reviews/<persona>.pass2.md`.
 
 **Format check.** Parse every file as YAML against the strict format in its prompt. Compare `at` values as numbers, not strings: the sheet prints `6.10s` and personas write `6.1s` as often as `6.10s`. An invalid file is relaunched once with the parse error quoted. Still invalid: drop that persona for this round and say so in the synthesis.
 

@@ -62,6 +62,7 @@ For Explainer documentation pages rather than articles, this defers to a separat
 A [rustmotion](https://github.com/LeadcodeDev/rustmotion) video generated, then refined by a panel of personas: a business decision maker, the general public, a technical profile, plus any audience you add for one video. Each reviews a contact sheet of the render, then argues with the others' reviews, and the agreed corrections become the next round.
 
 - **Three gates.** You approve the storyboard, the synthesis of every round, and the final render. Nothing is generated before the storyboard is approved.
+- **Personas are real agents.** `panel-decision-maker`, `panel-general-public` and `panel-tech` ship in `agents/`, each pinned to `sonnet` with only `Read` and `Write`. A persona added for one video runs on a generic agent, because Claude Code only loads agents at session start.
 - **Pass 1 is blind.** Personas review in parallel without seeing each other; the debate happens in pass 2, where each one agrees, concedes or contests every change the others asked for.
 - **Viewers, not reviewers of code.** Personas see the brief, the storyboard and a 4×4 contact sheet from `rustmotion sheet`, never the JSON.
 - **Nothing unvalidated reaches the panel.** Every round passes `rustmotion validate` first.
