@@ -4,12 +4,12 @@
     "name": "Baptiste Parmantier",
     "url": "https://github.com/LeadcodeDev"
   },
-  "description": "Auditing and writing skills published by Baptiste Parmantier.",
+  "description": "Auditing, writing and video skills published by Baptiste Parmantier.",
   "plugins": [
     {
       "name": "baptistep",
       "source": "./",
-      "description": "Codebase auditing and writing for publication."
+      "description": "Codebase auditing, writing for publication, and persona-reviewed rustmotion videos."
     }
   ]
 }

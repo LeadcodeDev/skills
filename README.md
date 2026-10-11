@@ -1,8 +1,8 @@
 # baptistep
 
-Engineering skills for [Claude Code](https://claude.com/claude-code) — how a codebase is assessed, and how what you learn gets published.
+Engineering skills for [Claude Code](https://claude.com/claude-code) — how a codebase is assessed, how what you learn gets published, and how a video gets reviewed before it ships.
 
-Two skills, one plugin. They are opinionated on purpose: each one encodes decisions that would otherwise be re-litigated in every session.
+Three skills, one plugin. They are opinionated on purpose: each one encodes decisions that would otherwise be re-litigated in every session.
 
 ## Install
 
@@ -11,7 +11,7 @@ Two skills, one plugin. They are opinionated on purpose: each one encodes decisi
 /plugin install baptistep@baptistep-skills
 ```
 
-Then the skills are available as `/baptistep:audit` and `/baptistep:writing`. Most of the time you will not type them — each declares the contexts it should fire in, and Claude consults them on its own.
+Then the skills are available as `/baptistep:audit`, `/baptistep:writing` and `/baptistep:rustmotion`. Most of the time you will not type them — each declares the contexts it should fire in, and Claude consults them on its own.
 
 To work on the skills themselves, point the marketplace at a local clone instead:
 
@@ -56,6 +56,18 @@ On the blog: source ranking, coverage without a template, inline links on the cl
 Two things are asked before a post is drafted rather than guessed: which framework, and whether lists carry emoji bullets. The second is a preference that changes per post, and the skill that decides it for you is the one that produces posts in its own voice instead of yours.
 
 For Explainer documentation pages rather than articles, this defers to a separate docs skill.
+
+### `rustmotion` — a video reviewed by the people it is for
+
+A [rustmotion](https://github.com/LeadcodeDev/rustmotion) video generated, then refined by a panel of personas: a business decision maker, the general public, a technical profile, plus any audience you add for one video. Each reviews a contact sheet of the render, then argues with the others' reviews, and the agreed corrections become the next round.
+
+- **Three gates.** You approve the storyboard, the synthesis of every round, and the final render. Nothing is generated before the storyboard is approved.
+- **Pass 1 is blind.** Personas review in parallel without seeing each other; the debate happens in pass 2, where each one agrees, concedes or contests every change the others asked for.
+- **Viewers, not reviewers of code.** Personas see the brief, the storyboard and a 4×4 contact sheet from `rustmotion sheet`, never the JSON.
+- **Nothing unvalidated reaches the panel.** Every round passes `rustmotion validate` first.
+- **Disagreements are decided by the primary audience** named in the brief, and shown to you side by side.
+
+Works from any directory: it asks whether to create a folder or use the current one, and loads the authoring guide from a local rustmotion clone or from GitHub rather than carrying a copy that would drift.
 
 ## How they fit together
 
