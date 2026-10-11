@@ -1,0 +1,90 @@
+{
+  "skill_name": "rustmotion",
+  "evals": [
+    {
+      "id": 0,
+      "name": "product-launch-decision-makers",
+      "prompt": "Fais-moi une vidéo rustmotion de 30 secondes en 16:9 pour annoncer le lancement de FerrisKey, un IAM open source en Rust. La cible ce sont surtout des CTO et des DSI. Fais-la relire par plusieurs profils pour l'améliorer.",
+      "expected_output": "A 1920x1080 video around 30 s refined over at least one debated round, with decision-maker as primary audience and the three built-in personas active.",
+      "files": [],
+      "assertions": [
+        "Before the brief, the working-directory question offers exactly two options: create ./<slug>/ or use the current directory",
+        "The authoring guide is loaded from a local clone (crates/rustmotion/skills/SKILL.md) or raw GitHub before any scenario is written",
+        "The rustmotion binary is checked for the sheet subcommand before generation",
+        "brief.md names a primary audience",
+        "Gate 1: storyboard.md is shown and the turn ends before any scenario.json exists",
+        "Every round-N/scenario.json passes rustmotion validate (schema and geometry)",
+        "Every round directory contains sheet.png, rendered after validation",
+        "Pass-1 agents are dispatched in a single message, one per active persona, and receive no other persona's review",
+        "Built-in personas are dispatched as baptistep:panel-<id>; added personas as general-purpose on sonnet with their persona file",
+        "Personas receive the brief, the storyboard and the sheet, never scenario.json",
+        "Every active persona has a pass1.md and a pass2.md matching the strict YAML formats",
+        "Every pass-1 and pass-2 file parses as YAML; `at` values are matched to sheet timestamps numerically",
+        "Every legibility change in the synthesis is backed by a full-size `rustmotion still` of that instant",
+        "synthesis.md separates consensus from disagreements and decides disagreements by the primary audience",
+        "Gate 2 ends the turn after every synthesis",
+        "The reason the loop ended is stated (user stop, all pass-2 scores >= 8, or max rounds)",
+        "Gate 3 gives final.mp4, the score trajectory per persona and what remains unresolved",
+        "brief.md format is 1920x1080 and duration 30",
+        "The primary audience is decision-maker"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "technical-explainer-added-persona",
+      "prompt": "I want a 45s portrait video explaining how rustmotion's box_tree -> layout_pass -> paint_pass pipeline works. Panel review it, but drop the general public persona and add a 'technical writer' persona who cares about how clearly the concepts are taught.",
+      "expected_output": "A 1080x1920 explainer reviewed by decision-maker, tech and an added technical-writer persona; general-public is not dispatched.",
+      "files": [],
+      "assertions": [
+        "Before the brief, the working-directory question offers exactly two options: create ./<slug>/ or use the current directory",
+        "The authoring guide is loaded from a local clone (crates/rustmotion/skills/SKILL.md) or raw GitHub before any scenario is written",
+        "The rustmotion binary is checked for the sheet subcommand before generation",
+        "brief.md names a primary audience",
+        "Gate 1: storyboard.md is shown and the turn ends before any scenario.json exists",
+        "Every round-N/scenario.json passes rustmotion validate (schema and geometry)",
+        "Every round directory contains sheet.png, rendered after validation",
+        "Pass-1 agents are dispatched in a single message, one per active persona, and receive no other persona's review",
+        "Built-in personas are dispatched as baptistep:panel-<id>; added personas as general-purpose on sonnet with their persona file",
+        "Personas receive the brief, the storyboard and the sheet, never scenario.json",
+        "Every active persona has a pass1.md and a pass2.md matching the strict YAML formats",
+        "Every pass-1 and pass-2 file parses as YAML; `at` values are matched to sheet timestamps numerically",
+        "Every legibility change in the synthesis is backed by a full-size `rustmotion still` of that instant",
+        "synthesis.md separates consensus from disagreements and decides disagreements by the primary audience",
+        "Gate 2 ends the turn after every synthesis",
+        "The reason the loop ended is stated (user stop, all pass-2 scores >= 8, or max rounds)",
+        "Gate 3 gives final.mp4, the score trajectory per persona and what remains unresolved",
+        "No general-public review exists in any round",
+        "personas/technical-writer.md exists in the working directory and has the five sections of references/persona-format.md",
+        "A technical-writer review exists in every round"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "general-public-promo",
+      "prompt": "fais une petite vidéo carrée de 20s pour expliquer à ma grand-mère ce qu'est un mot de passe fort, et améliore-la avec les avis de plusieurs personnes, 2 tours max",
+      "expected_output": "A 1080x1080 video of about 20 s with general-public as primary audience, stopping after at most two rounds.",
+      "files": [],
+      "assertions": [
+        "Before the brief, the working-directory question offers exactly two options: create ./<slug>/ or use the current directory",
+        "The authoring guide is loaded from a local clone (crates/rustmotion/skills/SKILL.md) or raw GitHub before any scenario is written",
+        "The rustmotion binary is checked for the sheet subcommand before generation",
+        "brief.md names a primary audience",
+        "Gate 1: storyboard.md is shown and the turn ends before any scenario.json exists",
+        "Every round-N/scenario.json passes rustmotion validate (schema and geometry)",
+        "Every round directory contains sheet.png, rendered after validation",
+        "Pass-1 agents are dispatched in a single message, one per active persona, and receive no other persona's review",
+        "Built-in personas are dispatched as baptistep:panel-<id>; added personas as general-purpose on sonnet with their persona file",
+        "Personas receive the brief, the storyboard and the sheet, never scenario.json",
+        "Every active persona has a pass1.md and a pass2.md matching the strict YAML formats",
+        "Every pass-1 and pass-2 file parses as YAML; `at` values are matched to sheet timestamps numerically",
+        "Every legibility change in the synthesis is backed by a full-size `rustmotion still` of that instant",
+        "synthesis.md separates consensus from disagreements and decides disagreements by the primary audience",
+        "Gate 2 ends the turn after every synthesis",
+        "The reason the loop ended is stated (user stop, all pass-2 scores >= 8, or max rounds)",
+        "Gate 3 gives final.mp4, the score trajectory per persona and what remains unresolved",
+        "The primary audience is general-public",
+        "max rounds is 2 and no round-3 directory exists"
+      ]
+    }
+  ]
+}
